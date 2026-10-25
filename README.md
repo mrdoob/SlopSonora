@@ -4,6 +4,18 @@ A New York City simulation built with [three.js](https://threejs.org/), WebGPURe
 
 [Try it live](https://mrdoob.github.io/slop-newyork/)
 
+## Ciudad Obregón
+
+`obregon.html` runs the same engine on Ciudad Obregón, Sonora, built from OpenStreetMap. Its import map swaps New York's city modules for the ones in `js/obregon/`: the geography, configuration, ground, buildings, landmarks, street furniture, surroundings, map and scenic cameras. Traffic, pedestrians, controls, lighting and materials are shared.
+
+To rebuild `js/obregon/geodata.js` from the OpenStreetMap extracts in `tools/data/obregon/`:
+
+```sh
+node tools/build-obregon.mjs
+```
+
+To refresh an extract, run `tools/overpass.sh tools/data/obregon/osm_roads.json tools/data/obregon/q_roads.overpassql`. The same command works for `buildings`, `areas` and `pois`.
+
 ## Make it your own
 
 Fork it, remix it, improve it, break it. Make games, animations, films, experiments, or something completely different. Use it as a starting point and take it wherever you want. Have fun!

@@ -1,0 +1,2795 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-25T18:33:51Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 273589866,
+  "lat": 27.4846619,
+  "lon": -109.9337782,
+  "tags": {
+    "name": "Ciudad Obregón",
+    "name:en": "Ciudad Obregón",
+    "name:ko": "시우다드오브레곤",
+    "place": "city",
+    "population": "329404",
+    "population:date": "2020",
+    "postal_code": "85000-85059",
+    "source": "https://mexico.pueblosamerica.com/i/ciudad-obregon/",
+    "source:population": "https://www.inegi.org.mx/programas/ccpv/2020/#Datos_abiertos",
+    "wikidata": "Q681340",
+    "wikipedia": "en:Ciudad Obregón"
+  }
+},
+{
+  "type": "node",
+  "id": 333132946,
+  "lat": 27.5116660,
+  "lon": -109.9903657,
+  "tags": {
+    "is_in": "Cajeme,Sonora,Mexico",
+    "name": "Providencia",
+    "place": "town",
+    "population": "4501"
+  }
+},
+{
+  "type": "node",
+  "id": 333132974,
+  "lat": 27.4326557,
+  "lon": -110.0183152,
+  "tags": {
+    "is_in": "Cajeme,Sonora,Mexico",
+    "name": "Cuauhtémoc (Campo 5)",
+    "place": "village",
+    "population": "2629",
+    "source": "https://mexico.pueblosamerica.com/i/cuauhtemoc-campo-cinco/"
+  }
+},
+{
+  "type": "node",
+  "id": 333171711,
+  "lat": 27.5377646,
+  "lon": -109.9770440,
+  "tags": {
+    "is_in": "Bacum,Sonora,Mexico",
+    "name": "El Portón (Vicente Guerrero)",
+    "place": "village",
+    "population": "1317"
+  }
+},
+{
+  "type": "node",
+  "id": 336157662,
+  "lat": 27.4814342,
+  "lon": -110.0170016,
+  "tags": {
+    "is_in": "Cajeme,Sonora,Mexico",
+    "name": "Ejido Tepeyac (Campo Dos)",
+    "place": "village"
+  }
+},
+{
+  "type": "node",
+  "id": 336160466,
+  "lat": 27.4578333,
+  "lon": -109.9528333,
+  "tags": {
+    "is_in": "Cajeme,Sonora,Mexico",
+    "name": "Robles Castillo (Álvaro Obregón)",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 336160859,
+  "lat": 27.5260670,
+  "lon": -109.9348880,
+  "tags": {
+    "amenity": "university",
+    "check_date": "2025-10-10",
+    "is_in": "Cajeme,Sonora,Mexico",
+    "name": "Universidad la Salle"
+  }
+},
+{
+  "type": "node",
+  "id": 336160907,
+  "lat": 27.4583333,
+  "lon": -109.9541667,
+  "tags": {
+    "is_in": "Cajeme,Sonora,Mexico",
+    "name": "Álvaro Obregón (El Ranchito)",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 336160963,
+  "lat": 27.4559295,
+  "lon": -109.9596493,
+  "tags": {
+    "is_in": "Cajeme,Sonora,Mexico",
+    "name": "San Javier",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "node",
+  "id": 1301345224,
+  "lat": 27.4792471,
+  "lon": -109.9395133,
+  "tags": {
+    "amenity": "place_of_worship",
+    "denomination": "catholic",
+    "name": "Santísima Trinidad",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 1669825773,
+  "lat": 27.4931286,
+  "lon": -109.9662886,
+  "tags": {
+    "name": "Parque Ostimuri",
+    "tourism": "theme_park"
+  }
+},
+{
+  "type": "node",
+  "id": 1682829275,
+  "lat": 27.4649772,
+  "lon": -109.9296097,
+  "tags": {
+    "amenity": "hospital",
+    "check_date": "2026-02-20",
+    "emergency": "yes",
+    "name": "UMF 66"
+  }
+},
+{
+  "type": "node",
+  "id": 1761533185,
+  "lat": 27.4923107,
+  "lon": -109.9704529,
+  "tags": {
+    "alt_name": "ITSON",
+    "amenity": "school",
+    "name": "Instituto Tecnológico de Sonora"
+  }
+},
+{
+  "type": "node",
+  "id": 1834909743,
+  "lat": 27.4738532,
+  "lon": -109.9453657,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 1834932824,
+  "lat": 27.4741972,
+  "lon": -109.9453684,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 1889414212,
+  "lat": 27.5146877,
+  "lon": -109.9302027,
+  "tags": {
+    "amenity": "fuel",
+    "brand": "Pemex",
+    "brand:wikidata": "Q871308",
+    "name": "PEMEX"
+  }
+},
+{
+  "type": "node",
+  "id": 1996608098,
+  "lat": 27.4825280,
+  "lon": -109.9055019,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 2090290889,
+  "lat": 27.4825315,
+  "lon": -109.9057366,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 3336737093,
+  "lat": 27.5122880,
+  "lon": -109.9299750,
+  "tags": {
+    "addr:street": "MEX 15D",
+    "brand": "City Express",
+    "brand:wikidata": "Q109329542",
+    "internet_access": "yes",
+    "internet_access:fee": "no",
+    "name": "City Express",
+    "smoking": "no",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 4259716791,
+  "lat": 27.4920610,
+  "lon": -109.9291120,
+  "tags": {
+    "amenity": "fuel",
+    "brand": "Pemex",
+    "brand:wikidata": "Q871308",
+    "name": "PEMEX"
+  }
+},
+{
+  "type": "node",
+  "id": 4259727789,
+  "lat": 27.4994368,
+  "lon": -109.9294620,
+  "tags": {
+    "amenity": "fuel",
+    "brand": "Pemex",
+    "brand:wikidata": "Q871308",
+    "name": "PEMEX"
+  }
+},
+{
+  "type": "node",
+  "id": 4458003592,
+  "lat": 27.5341382,
+  "lon": -109.9591575,
+  "tags": {
+    "addr:postcode": "85010",
+    "addr:street": "Blvd. Bordo Nuevo S/N",
+    "amenity": "school",
+    "name": "Universidad de Sonora Campus Cajeme",
+    "name:en": "University of Sonora, Cajeme campus",
+    "name:es": "Universidad de Sonora Campus Cajeme",
+    "opening_hours": "Mo-Fr 07:00-22:00",
+    "phone": "+52 644 410 5270",
+    "website": "http://www.uson.mx"
+  }
+},
+{
+  "type": "node",
+  "id": 4578087895,
+  "lat": 27.4961140,
+  "lon": -109.9447000,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Ríos de Agua Viva"
+  }
+},
+{
+  "type": "node",
+  "id": 4599335390,
+  "lat": 27.5075303,
+  "lon": -109.9521205,
+  "tags": {
+    "addr:street": "y Tetabiate",
+    "amenity": "place_of_worship",
+    "denomination": "seventh_day_adventist",
+    "name": "Iglesia Adventista del 7mo día",
+    "name:en": "SDA church",
+    "name:es": "Iglesia Adventista del 7mo día",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 4599335391,
+  "lat": 27.4911917,
+  "lon": -109.9369223,
+  "tags": {
+    "addr:housenumber": "357 sur",
+    "addr:postcode": "85000",
+    "addr:street": "Puebla",
+    "amenity": "place_of_worship",
+    "building": "church",
+    "denomination": "seventh_day_adventist",
+    "name": "Iglesia Adventista del Centro",
+    "name:en": "SDA Church Centro",
+    "name:es": "Iglesia Adventista del Centro",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 4726879616,
+  "lat": 27.4929372,
+  "lon": -109.9459627,
+  "tags": {
+    "addr:postcode": "85140",
+    "addr:street": "Calle California",
+    "name": "Liverpool",
+    "opening_hours": "Mo-Su 11:00-21:00",
+    "shop": "mall",
+    "website": "https://www.liverpool.com.mx/tienda/home",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4726879617,
+  "lat": 27.4955226,
+  "lon": -109.9493267,
+  "tags": {
+    "amenity": "place_of_worship",
+    "denomination": "catholic",
+    "name": "Señor de los Milagros",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 4969488262,
+  "lat": 27.4576390,
+  "lon": -109.9433302,
+  "tags": {
+    "amenity": "fuel",
+    "name": "Pemex"
+  }
+},
+{
+  "type": "node",
+  "id": 5261301187,
+  "lat": 27.5008637,
+  "lon": -109.9727221,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "sculpture",
+    "name": "ABC"
+  }
+},
+{
+  "type": "node",
+  "id": 5261329432,
+  "lat": 27.4820213,
+  "lon": -109.9311794,
+  "tags": {
+    "historic": "monument",
+    "name": "Benito Juarez"
+  }
+},
+{
+  "type": "node",
+  "id": 5261329445,
+  "lat": 27.4826676,
+  "lon": -109.9299768,
+  "tags": {
+    "historic": "monument",
+    "name": "Monumento Juan Maldonado Tetabiate"
+  }
+},
+{
+  "type": "node",
+  "id": 5261360935,
+  "lat": 27.5030975,
+  "lon": -109.9385263,
+  "tags": {
+    "historic": "monument",
+    "name": "Los Pioneros"
+  }
+},
+{
+  "type": "node",
+  "id": 5261360936,
+  "lat": 27.5017655,
+  "lon": -109.9383565,
+  "tags": {
+    "historic": "monument",
+    "name": "Jose Maria Morelos y Pavon"
+  }
+},
+{
+  "type": "node",
+  "id": 5267431142,
+  "lat": 27.4447702,
+  "lon": -109.9214590,
+  "tags": {
+    "historic": "monument",
+    "name": "Vivir Mejor"
+  }
+},
+{
+  "type": "node",
+  "id": 5267431143,
+  "lat": 27.4439673,
+  "lon": -109.9254514,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Iglesia Corazon De Maria",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 5267442204,
+  "lat": 27.4393821,
+  "lon": -109.9265950,
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Iglesia Señora del Rosario",
+    "religion": "christian"
+  }
+},
+{
+  "type": "node",
+  "id": 5275534119,
+  "lat": 27.4823614,
+  "lon": -109.9057366,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 5275534120,
+  "lat": 27.4823661,
+  "lon": -109.9054939,
+  "tags": {
+    "highway": "traffic_signals"
+  }
+},
+{
+  "type": "node",
+  "id": 5282445209,
+  "lat": 27.5278666,
+  "lon": -109.9248291,
+  "tags": {
+    "amenity": "university",
+    "check_date": "2025-10-10",
+    "name": "itesca"
+  }
+},
+{
+  "type": "node",
+  "id": 5282472807,
+  "lat": 27.5283377,
+  "lon": -109.9240163,
+  "tags": {
+    "name": "PLAZA DEL ESTUDIANATE",
+    "place": "square"
+  }
+},
+{
+  "type": "node",
+  "id": 5329795603,
+  "lat": 27.5100042,
+  "lon": -109.9548967,
+  "tags": {
+    "artwork_type": "statue",
+    "name": "Danza de la vida",
+    "tourism": "artwork"
+  }
+},
+{
+  "type": "node",
+  "id": 5363919731,
+  "lat": 27.4848715,
+  "lon": -109.9666079,
+  "tags": {
+    "historic": "memorial",
+    "name": "Plaza del Maestro"
+  }
+},
+{
+  "type": "node",
+  "id": 5364165428,
+  "lat": 27.4840023,
+  "lon": -109.9338693,
+  "tags": {
+    "historic": "memorial",
+    "name": "Potros Itson"
+  }
+},
+{
+  "type": "node",
+  "id": 5364722690,
+  "lat": 27.4849939,
+  "lon": -109.9095068,
+  "tags": {
+    "amenity": "place_of_worship"
+  }
+},
+{
+  "type": "node",
+  "id": 5364722835,
+  "lat": 27.4891754,
+  "lon": -109.9457271,
+  "tags": {
+    "historic": "memorial",
+    "name": "Ignacio Zaragoza"
+  }
+},
+{
+  "type": "node",
+  "id": 5364866613,
+  "lat": 27.4717496,
+  "lon": -109.9457770,
+  "tags": {
+    "historic": "monument",
+    "name": "Manuel Clouthier"
+  }
+},
+{
+  "type": "node",
+  "id": 5364916363,
+  "lat": 27.4581697,
+  "lon": -109.9096502,
+  "tags": {
+    "historic": "memorial",
+    "name": "\"Yo Amo México\""
+  }
+},
+{
+  "type": "node",
+  "id": 5369012360,
+  "lat": 27.4574505,
+  "lon": -109.9037859,
+  "tags": {
+    "amenity": "school",
+    "name": "Escuela Primaria Nissan Obregón"
+  }
+},
+{
+  "type": "node",
+  "id": 5369188076,
+  "lat": 27.4612814,
+  "lon": -109.9095478,
+  "tags": {
+    "historic": "memorial",
+    "name": "Glorieta Las Misiones"
+  }
+},
+{
+  "type": "node",
+  "id": 5421853465,
+  "lat": 27.4974868,
+  "lon": -109.9313192,
+  "tags": {
+    "amenity": "townhall",
+    "name": "OOMAPAS"
+  }
+},
+{
+  "type": "node",
+  "id": 5432736902,
+  "lat": 27.4920851,
+  "lon": -109.9277556,
+  "tags": {
+    "historic": "monument",
+    "name": "Jesús García"
+  }
+},
+{
+  "type": "node",
+  "id": 5564723769,
+  "lat": 27.5093764,
+  "lon": -109.9307044,
+  "tags": {
+    "name": "Fiesta Inn",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5564723770,
+  "lat": 27.5091925,
+  "lon": -109.9303187,
+  "tags": {
+    "name": "Yori Inn",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5564723772,
+  "lat": 27.4983692,
+  "lon": -109.9303160,
+  "tags": {
+    "brand": "Wyndham Garden",
+    "brand:wikidata": "Q112144847",
+    "name": "Wyndham Garden",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 5811022307,
+  "lat": 27.4952112,
+  "lon": -109.9691489,
+  "tags": {
+    "tourism": "viewpoint"
+  }
+},
+{
+  "type": "node",
+  "id": 5863663769,
+  "lat": 27.4831505,
+  "lon": -109.9606417,
+  "tags": {
+    "amenity": "fuel"
+  }
+},
+{
+  "type": "node",
+  "id": 5863826047,
+  "lat": 27.4774304,
+  "lon": -109.9630849,
+  "tags": {
+    "historic": "monument",
+    "name": "Torre de Paris"
+  }
+},
+{
+  "type": "node",
+  "id": 5980026278,
+  "lat": 27.4808421,
+  "lon": -109.9495264,
+  "tags": {
+    "amenity": "school",
+    "name": "Escuela primaria 20 de Noviembre"
+  }
+},
+{
+  "type": "node",
+  "id": 5980042179,
+  "lat": 27.4760099,
+  "lon": -109.9473963,
+  "tags": {
+    "amenity": "school",
+    "name": "Escuela primaria Club de leones"
+  }
+},
+{
+  "type": "node",
+  "id": 5980052385,
+  "lat": 27.4892135,
+  "lon": -109.9475465,
+  "tags": {
+    "amenity": "school",
+    "name": "Escuela primaria recursos hidraulicos"
+  }
+},
+{
+  "type": "node",
+  "id": 5980055620,
+  "lat": 27.4891632,
+  "lon": -109.9484043,
+  "tags": {
+    "amenity": "school"
+  }
+},
+{
+  "type": "node",
+  "id": 8929736813,
+  "lat": 27.4835556,
+  "lon": -109.9497325,
+  "tags": {
+    "historic": "manor",
+    "name": "Vecinos",
+    "operator": "2"
+  }
+},
+{
+  "type": "node",
+  "id": 8929779118,
+  "lat": 27.4839054,
+  "lon": -109.9499954,
+  "tags": {
+    "historic": "manor",
+    "name": "Arturo"
+  }
+},
+{
+  "type": "node",
+  "id": 8929779125,
+  "lat": 27.4847596,
+  "lon": -109.9500170,
+  "tags": {
+    "historic": "manor",
+    "name": "Amelia"
+  }
+},
+{
+  "type": "node",
+  "id": 9025427917,
+  "lat": 27.4984191,
+  "lon": -109.9359536,
+  "tags": {
+    "tourism": "chalet"
+  }
+},
+{
+  "type": "node",
+  "id": 9454322306,
+  "lat": 27.5178154,
+  "lon": -109.9949402,
+  "tags": {
+    "name": "Rincón Campestre",
+    "place": "isolated_dwelling"
+  }
+},
+{
+  "type": "node",
+  "id": 9454322307,
+  "lat": 27.5267545,
+  "lon": -109.9887872,
+  "tags": {
+    "name": "Sesgado",
+    "place": "isolated_dwelling"
+  }
+},
+{
+  "type": "node",
+  "id": 9454322308,
+  "lat": 27.5231913,
+  "lon": -109.9810624,
+  "tags": {
+    "name": "Santa Fe",
+    "place": "isolated_dwelling"
+  }
+},
+{
+  "type": "node",
+  "id": 9454322309,
+  "lat": 27.5211266,
+  "lon": -109.9832028,
+  "tags": {
+    "name": "El Ranchito",
+    "place": "hamlet"
+  }
+},
+{
+  "type": "node",
+  "id": 12485888001,
+  "lat": 27.4980664,
+  "lon": -109.9433583,
+  "tags": {
+    "name": "Bugambilias hotel",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "node",
+  "id": 13060696802,
+  "lat": 27.4490896,
+  "lon": -109.9471840,
+  "tags": {
+    "addr:housenumber": "542",
+    "addr:postcode": "85198",
+    "addr:street": "Calle Cisne",
+    "email": "darmentar@gmail.com",
+    "internet_access": "wlan",
+    "level": "1",
+    "name": "CASA FAMILIAR",
+    "opening_hours": "24/7",
+    "tourism": "guest_house"
+  }
+},
+{
+  "type": "node",
+  "id": 13963376444,
+  "lat": 27.4958026,
+  "lon": -109.9837174,
+  "tags": {
+    "name": "Terrazaz Monet",
+    "place": "neighbourhood"
+  }
+},
+{
+  "type": "way",
+  "id": 132500549,
+  "center": {
+    "lat": 27.4833181,
+    "lon": -109.9344455
+  },
+  "nodes": [
+    1457417731,
+    1457417727,
+    1457417724,
+    1457417729,
+    1833761205,
+    1457417731
+  ],
+  "tags": {
+    "amenity": "university",
+    "building": "school",
+    "check_date": "2026-02-20",
+    "designation": "A-200",
+    "name": "Aulas"
+  }
+},
+{
+  "type": "way",
+  "id": 132500649,
+  "center": {
+    "lat": 27.4838855,
+    "lon": -109.9339179
+  },
+  "nodes": [
+    1457418200,
+    1457418199,
+    1833760071,
+    1833761780,
+    1457418202,
+    1833761777,
+    1833761778,
+    1457417454,
+    1457417450,
+    5067575377,
+    5067575374,
+    5401665194,
+    5401665195,
+    5401665200,
+    5401665201,
+    1457418201,
+    5401665204,
+    1457418200
+  ],
+  "tags": {
+    "addr:housename": "Campus Obregón Centro",
+    "addr:housenumber": "818",
+    "addr:postcode": "85000",
+    "addr:street": "5 de Febrero Sur",
+    "amenity": "university",
+    "building:levels": "4",
+    "name": "Instituto Tecnológico de Sonora"
+  }
+},
+{
+  "type": "way",
+  "id": 172470487,
+  "center": {
+    "lat": 27.4829416,
+    "lon": -109.9344639
+  },
+  "nodes": [
+    1833760068,
+    1833760069,
+    1833760071,
+    1833760070,
+    1833760068
+  ],
+  "tags": {
+    "amenity": "university",
+    "building": "school",
+    "check_date": "2026-02-20",
+    "designation": "A-100",
+    "name": "Aulas"
+  }
+},
+{
+  "type": "way",
+  "id": 172470709,
+  "center": {
+    "lat": 27.4837000,
+    "lon": -109.9340294
+  },
+  "nodes": [
+    5061211151,
+    1833761942,
+    1833761941,
+    1833761940,
+    5061211151
+  ],
+  "tags": {
+    "amenity": "university",
+    "building": "office",
+    "check_date": "2026-02-20",
+    "name": "Rectoría"
+  }
+},
+{
+  "type": "way",
+  "id": 172600110,
+  "center": {
+    "lat": 27.5316901,
+    "lon": -109.9438163
+  },
+  "nodes": [
+    1834900886,
+    1834900884,
+    8110371596,
+    1834900888,
+    8110371605,
+    8110371604,
+    8110371603,
+    8110371602,
+    8110371601,
+    8110371598,
+    8110371597,
+    8110371600,
+    1834900883,
+    8110371599,
+    1834900886
+  ],
+  "tags": {
+    "addr:housenumber": "2100",
+    "addr:postcode": "85010",
+    "addr:street": "California",
+    "alt_name": "ITESM",
+    "amenity": "university",
+    "designation": "Campus Ciudad Obregón",
+    "name": "Instituto Tecnológico y de Estudios Superiores de Monterrey",
+    "old_name": "Tec de Monterrey"
+  }
+},
+{
+  "type": "way",
+  "id": 172602520,
+  "center": {
+    "lat": 27.5146899,
+    "lon": -109.9467163
+  },
+  "nodes": [
+    1834920503,
+    1834920494,
+    1834920479,
+    1834920464,
+    1834920478,
+    1834920477,
+    1834920450,
+    1834920503
+  ],
+  "tags": {
+    "amenity": "place_of_worship",
+    "name": "Amistad Cristiana",
+    "religion": "christian"
+  }
+},
+{
+  "type": "way",
+  "id": 172614553,
+  "center": {
+    "lat": 27.5107202,
+    "lon": -109.9349482
+  },
+  "nodes": [
+    1835025434,
+    1835025433,
+    1835025439,
+    1835025438,
+    8083699032,
+    8083699033,
+    1835025436,
+    1835025434
+  ],
+  "tags": {
+    "amenity": "school",
+    "name": "Colegio La Salle"
+  }
+},
+{
+  "type": "way",
+  "id": 172615232,
+  "center": {
+    "lat": 27.5125391,
+    "lon": -109.9334259
+  },
+  "nodes": [
+    1835032836,
+    1835032891,
+    1835032840,
+    1835032837,
+    1835032893,
+    1835032832,
+    1835032846,
+    1835032873,
+    1835032870,
+    1835032901,
+    1835032835,
+    1835032882,
+    1835032906,
+    1835032844,
+    1835032899,
+    1835032825,
+    1835032838,
+    1835032839,
+    1835032836
+  ],
+  "tags": {
+    "addr:housenumber": "749",
+    "addr:postcode": "85010",
+    "addr:street": "Avenida Norte",
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Centro Médico Sur de Sonora"
+  }
+},
+{
+  "type": "way",
+  "id": 172615241,
+  "center": {
+    "lat": 27.5152048,
+    "lon": -109.9339222
+  },
+  "nodes": [
+    1835032831,
+    1835032889,
+    1835032841,
+    1835032900,
+    1835032831
+  ],
+  "tags": {
+    "addr:housename": "Instalaciones",
+    "addr:housenumber": "1011",
+    "addr:postcode": "85010",
+    "addr:street": "5 de Febrero Norte",
+    "amenity": "school",
+    "name": "Colegio Progreso"
+  }
+},
+{
+  "type": "way",
+  "id": 172630987,
+  "center": {
+    "lat": 27.4975066,
+    "lon": -109.9333767
+  },
+  "nodes": [
+    1835178160,
+    1835178166,
+    1835178156,
+    1835178134,
+    1835178133,
+    1835178132,
+    1835178126,
+    1835178129,
+    1835178157,
+    1835178144,
+    1835178137,
+    1835178138,
+    1835178140,
+    1835178141,
+    1835178163,
+    1835178165,
+    1835178125,
+    1835178123,
+    1835178124,
+    1835178131,
+    1835178153,
+    1835178135,
+    1835178160
+  ],
+  "tags": {
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "name": "Catedral del Sagrado Corazón de Jesús",
+    "religion": "christian"
+  }
+},
+{
+  "type": "way",
+  "id": 172701665,
+  "center": {
+    "lat": 27.5067597,
+    "lon": -109.9498107
+  },
+  "nodes": [
+    1835811085,
+    1835811070,
+    1835811089,
+    1835811092,
+    1835811075,
+    1835811094,
+    1835811090,
+    1835811081,
+    1835811085
+  ],
+  "tags": {
+    "addr:housenumber": "s/n",
+    "addr:postcode": "85040",
+    "addr:street": "Arizpe",
+    "amenity": "school",
+    "name": "Primaria Obregón 50"
+  }
+},
+{
+  "type": "way",
+  "id": 172701902,
+  "center": {
+    "lat": 27.5065788,
+    "lon": -109.9462314
+  },
+  "nodes": [
+    1835815519,
+    1835815520,
+    1835815517,
+    1835815522,
+    1835815519
+  ],
+  "tags": {
+    "addr:housenumber": "217",
+    "addr:postcode": "85100",
+    "addr:street": "California Norte",
+    "amenity": "school",
+    "designation": "Primaria",
+    "name": "Instituto de Optimo Desarrollo Infantil"
+  }
+},
+{
+  "type": "way",
+  "id": 188549840,
+  "center": {
+    "lat": 27.4883289,
+    "lon": -109.9970716
+  },
+  "nodes": [
+    1991783216,
+    1991783215,
+    1991783217,
+    1991783214,
+    1991783216
+  ],
+  "tags": {
+    "addr:housenumber": "3720",
+    "addr:postcode": "85136",
+    "addr:street": "Marbella",
+    "alt_name": "Escuela Secundaria Oscar Romero Carpena",
+    "amenity": "school",
+    "name": "La Escuela Secundaria Técnica Estatal Agropecuaria No. 16"
+  }
+},
+{
+  "type": "way",
+  "id": 188554689,
+  "center": {
+    "lat": 27.4921808,
+    "lon": -109.9948854
+  },
+  "nodes": [
+    1991857954,
+    1991857953,
+    1991857951,
+    1991857956,
+    1991857954
+  ],
+  "tags": {
+    "addr:postcode": "85136",
+    "addr:street": "De las Cruzadas",
+    "amenity": "school",
+    "name": "Jardín de Niños Armida González Castro"
+  }
+},
+{
+  "type": "way",
+  "id": 189015110,
+  "center": {
+    "lat": 27.4873690,
+    "lon": -109.9049663
+  },
+  "nodes": [
+    1996635408,
+    1996635418,
+    1996635421,
+    1996635411,
+    1996635408
+  ],
+  "tags": {
+    "amenity": "school"
+  }
+},
+{
+  "type": "way",
+  "id": 210810618,
+  "center": {
+    "lat": 27.4790578,
+    "lon": -109.9272553
+  },
+  "nodes": [
+    2208499739,
+    2208499694,
+    2208499658,
+    2208499716,
+    2208499735,
+    2208499652,
+    2208499749,
+    2208499743,
+    2208499684,
+    2208499692,
+    2208499696,
+    2208499753,
+    2208499654,
+    2208499728,
+    2208499678,
+    2208499666,
+    2208499741,
+    2208499708,
+    2208499690,
+    2208499718,
+    2208499739
+  ],
+  "tags": {
+    "addr:housename": "Plaza Yaqui",
+    "addr:postcode": "85080",
+    "addr:street": "Jalisco esq. Carretera Internacional",
+    "building": "yes",
+    "name": "Plaza Obregón",
+    "shop": "mall"
+  }
+},
+{
+  "type": "way",
+  "id": 215312706,
+  "center": {
+    "lat": 27.4671300,
+    "lon": -109.9565721
+  },
+  "nodes": [
+    2247191233,
+    2247191236,
+    2247191239,
+    2247191237,
+    2247191234,
+    2247191231,
+    2247191230,
+    2247191235,
+    2247191238,
+    2247191232,
+    2247191233
+  ],
+  "tags": {
+    "addr:housenumber": "206",
+    "addr:street": "Juan de la Barrera",
+    "amenity": "college",
+    "name": "ICATSON"
+  }
+},
+{
+  "type": "way",
+  "id": 215533902,
+  "center": {
+    "lat": 27.4658811,
+    "lon": -109.9620737
+  },
+  "nodes": [
+    2249937203,
+    2249937200,
+    2249937202,
+    2249937201,
+    2249937203
+  ],
+  "tags": {
+    "amenity": "school"
+  }
+},
+{
+  "type": "way",
+  "id": 215903221,
+  "center": {
+    "lat": 27.4636840,
+    "lon": -109.9381004
+  },
+  "nodes": [
+    2253190746,
+    2253190740,
+    2253190743,
+    2253190737,
+    2253190746
+  ],
+  "tags": {
+    "amenity": "school"
+  }
+},
+{
+  "type": "way",
+  "id": 216657539,
+  "center": {
+    "lat": 27.4727930,
+    "lon": -109.9493413
+  },
+  "nodes": [
+    2260493495,
+    2260493493,
+    2260493494,
+    2260493496,
+    2260493495
+  ],
+  "tags": {
+    "amenity": "school"
+  }
+},
+{
+  "type": "way",
+  "id": 402040764,
+  "center": {
+    "lat": 27.4453410,
+    "lon": -109.9379706
+  },
+  "nodes": [
+    2360635497,
+    2360635477,
+    2360635478,
+    2360635495,
+    2360635497
+  ],
+  "tags": {
+    "amenity": "school",
+    "name": "Escuela Primaria Fray Francisco Eusebio Kino"
+  }
+},
+{
+  "type": "way",
+  "id": 402040765,
+  "center": {
+    "lat": 27.4453282,
+    "lon": -109.9415653
+  },
+  "nodes": [
+    2360635491,
+    2360635483,
+    2360635479,
+    2360635472,
+    3210130731,
+    2360635490,
+    3209383999,
+    2360635491
+  ],
+  "tags": {
+    "amenity": "school"
+  }
+},
+{
+  "type": "way",
+  "id": 402040767,
+  "center": {
+    "lat": 27.4966230,
+    "lon": -109.9599298
+  },
+  "nodes": [
+    1836038302,
+    1836010068,
+    1836010063,
+    1836083436,
+    1836083454,
+    1836010067,
+    1835961163,
+    1835961158,
+    1836038303,
+    1836039177,
+    1836038302
+  ],
+  "tags": {
+    "amenity": "school",
+    "name": "CBTyS #37"
+  }
+},
+{
+  "type": "way",
+  "id": 478955780,
+  "center": {
+    "lat": 27.5101425,
+    "lon": -109.9258370
+  },
+  "nodes": [
+    4721294250,
+    4721294255,
+    4721294256,
+    4721294248,
+    4721294249,
+    4721294257,
+    4721294258,
+    4721294259,
+    4721294250
+  ],
+  "tags": {
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "name": "Iglesia Nuevo Cajeme",
+    "religion": "christian"
+  }
+},
+{
+  "type": "way",
+  "id": 479613518,
+  "center": {
+    "lat": 27.4941275,
+    "lon": -109.9455479
+  },
+  "nodes": [
+    4726879592,
+    4726879593,
+    4726879594,
+    4726879595,
+    4726879592
+  ],
+  "tags": {
+    "amenity": "fuel",
+    "name": "Gasolinera California"
+  }
+},
+{
+  "type": "way",
+  "id": 479613524,
+  "center": {
+    "lat": 27.4941324,
+    "lon": -109.9669663
+  },
+  "nodes": [
+    4726879686,
+    4726879687,
+    4726879688,
+    4726879689,
+    4726879690,
+    4726879691,
+    4726879692,
+    4726879693,
+    4726879694,
+    4726879695,
+    4726879696,
+    4726879697,
+    4726879698,
+    4726879699,
+    4726879700,
+    4726879701,
+    4726879702,
+    4726879703,
+    4726879704,
+    4726879705,
+    4726879706,
+    4726879707,
+    4726879708,
+    4726879709,
+    4726879710,
+    4726879711,
+    4726879712,
+    4726879686
+  ],
+  "tags": {
+    "name": "Ostimuri",
+    "tourism": "theme_park"
+  }
+},
+{
+  "type": "way",
+  "id": 481145060,
+  "center": {
+    "lat": 27.4390153,
+    "lon": -109.9272625
+  },
+  "nodes": [
+    4740883950,
+    4740883951,
+    5866360381,
+    5866360376,
+    4740883952,
+    4740883953,
+    4740883954,
+    4740883955,
+    4740883950
+  ],
+  "tags": {
+    "amenity": "school",
+    "name": "Técnica #4 Vicente Monroy Mendoza"
+  }
+},
+{
+  "type": "way",
+  "id": 487217933,
+  "center": {
+    "lat": 27.4543149,
+    "lon": -109.9134310
+  },
+  "nodes": [
+    4797284212,
+    4797284213,
+    4797284214,
+    4797284215,
+    4797284212
+  ],
+  "tags": {
+    "amenity": "school"
+  }
+},
+{
+  "type": "way",
+  "id": 507509084,
+  "center": {
+    "lat": 27.4767301,
+    "lon": -109.9440412
+  },
+  "nodes": [
+    4969929928,
+    4969929927,
+    4969929926,
+    4969929925,
+    4969929928
+  ],
+  "tags": {
+    "amenity": "school",
+    "building": "yes",
+    "building:levels": "4",
+    "name": "Escuela Secundaria Técnica #2"
+  }
+},
+{
+  "type": "way",
+  "id": 515724972,
+  "center": {
+    "lat": 27.4933758,
+    "lon": -109.9274912
+  },
+  "nodes": [
+    5035963415,
+    5035963416,
+    5035963417,
+    5035963418,
+    5035963419,
+    5035963420,
+    5432736793,
+    5432736794,
+    5035963415
+  ],
+  "tags": {
+    "amenity": "townhall",
+    "building": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 516222835,
+  "center": {
+    "lat": 27.5252850,
+    "lon": -109.9343796
+  },
+  "nodes": [
+    5039747537,
+    5039747538,
+    5039747539,
+    5039747540,
+    5039747537
+  ],
+  "tags": {
+    "addr:city": "Ciudad Obregón",
+    "addr:postcode": "85040",
+    "addr:street": "Veracruz",
+    "amenity": "university",
+    "check_date": "2025-10-10",
+    "name": "Universidad La Salle Noroeste"
+  }
+},
+{
+  "type": "way",
+  "id": 518947321,
+  "center": {
+    "lat": 27.4911587,
+    "lon": -109.9333577
+  },
+  "nodes": [
+    5061211195,
+    5061211201,
+    5061211196,
+    5061211202,
+    5061211197,
+    5061211198,
+    5061211199,
+    5061211200,
+    5061211195
+  ],
+  "tags": {
+    "amenity": "marketplace",
+    "building": "commercial",
+    "name": "MerCajeme",
+    "operator": "Municipio de Cajeme"
+  }
+},
+{
+  "type": "way",
+  "id": 556410215,
+  "center": {
+    "lat": 27.4898802,
+    "lon": -109.9363587
+  },
+  "nodes": [
+    5367505852,
+    5367505853,
+    5367505854,
+    5367505855,
+    5367505852
+  ],
+  "tags": {
+    "historic": "monument",
+    "name": "Monumento Gral. Lázaro Cárdenas"
+  }
+},
+{
+  "type": "way",
+  "id": 556414650,
+  "center": {
+    "lat": 27.5281534,
+    "lon": -109.9248705
+  },
+  "nodes": [
+    5367535825,
+    5367535826,
+    5367535827,
+    5367535828,
+    5367535825
+  ],
+  "tags": {
+    "amenity": "university",
+    "check_date": "2025-10-10",
+    "name": "Aulas y Rectoria"
+  }
+},
+{
+  "type": "way",
+  "id": 556414651,
+  "center": {
+    "lat": 27.5285686,
+    "lon": -109.9247932
+  },
+  "nodes": [
+    5367535829,
+    5367535830,
+    5367535831,
+    5367535832,
+    5367535829
+  ],
+  "tags": {
+    "amenity": "university",
+    "check_date": "2025-10-10",
+    "name": "Aulas"
+  }
+},
+{
+  "type": "way",
+  "id": 556414652,
+  "center": {
+    "lat": 27.5287271,
+    "lon": -109.9247670
+  },
+  "nodes": [
+    5367535833,
+    5367535834,
+    5367535835,
+    5367535836,
+    5367535830,
+    5367535829,
+    5367535833
+  ],
+  "tags": {
+    "amenity": "university",
+    "check_date": "2025-10-10",
+    "name": "Talleres de Mecánica"
+  }
+},
+{
+  "type": "way",
+  "id": 556414653,
+  "center": {
+    "lat": 27.5289300,
+    "lon": -109.9245688
+  },
+  "nodes": [
+    5367535837,
+    5367535838,
+    5367535839,
+    5367535840,
+    5367535841,
+    5367535842,
+    5367535843,
+    5367535844,
+    5367535837
+  ],
+  "tags": {
+    "amenity": "university",
+    "check_date": "2025-10-10",
+    "name": "aulas"
+  }
+},
+{
+  "type": "way",
+  "id": 556414654,
+  "center": {
+    "lat": 27.5277999,
+    "lon": -109.9241353
+  },
+  "nodes": [
+    5367535845,
+    5367535914,
+    5367535846,
+    5367535847,
+    5367535848,
+    5367535845
+  ],
+  "tags": {
+    "amenity": "university",
+    "check_date": "2025-10-10",
+    "name": "Aulas"
+  }
+},
+{
+  "type": "way",
+  "id": 556414655,
+  "center": {
+    "lat": 27.5284608,
+    "lon": -109.9233447
+  },
+  "nodes": [
+    5367535849,
+    5367535850,
+    5367535851,
+    5367535852,
+    5367535849
+  ],
+  "tags": {
+    "amenity": "university",
+    "check_date": "2025-10-10",
+    "name": "Aulas"
+  }
+},
+{
+  "type": "way",
+  "id": 556414656,
+  "center": {
+    "lat": 27.5279774,
+    "lon": -109.9233359
+  },
+  "nodes": [
+    5367535853,
+    5367535854,
+    5367535855,
+    5367535856,
+    5367535853
+  ],
+  "tags": {
+    "amenity": "university",
+    "check_date": "2025-10-10",
+    "name": "Aulas"
+  }
+},
+{
+  "type": "way",
+  "id": 556552244,
+  "center": {
+    "lat": 27.5275934,
+    "lon": -109.9502940
+  },
+  "nodes": [
+    5368794175,
+    5368794176,
+    5368794177,
+    5368794178,
+    5368794179,
+    5368794181,
+    5368794337,
+    7736134331,
+    5368794180,
+    6229474078,
+    5368794162,
+    6229474079,
+    5368794163,
+    7736134336,
+    7736134337,
+    7736134335,
+    7736134338,
+    7736134333,
+    7736134332,
+    5368794173,
+    5368794174,
+    5368794167,
+    5368794168,
+    5368794169,
+    6229474065,
+    5368794170,
+    6229474077,
+    5368794171,
+    5368794172,
+    5368794175
+  ],
+  "tags": {
+    "check_date": "2025-10-10",
+    "leisure": "stadium",
+    "name": "Estadio Yaquis",
+    "wikidata": "Q28155525",
+    "wikipedia": "es:Nuevo Estadio Yaquis"
+  }
+},
+{
+  "type": "way",
+  "id": 556604325,
+  "center": {
+    "lat": 27.4673003,
+    "lon": -109.9137916
+  },
+  "nodes": [
+    5369198869,
+    5369198870,
+    5369198871,
+    5369198872,
+    5369198873,
+    5369198874,
+    5369198875,
+    5369198876,
+    5369198877,
+    5369198878,
+    5369198879,
+    5369198880,
+    5369198881,
+    5369198882,
+    5369198883,
+    5369198884,
+    5369198885,
+    5369198886,
+    5369198887,
+    5369198888,
+    5369198889,
+    5369198890,
+    5369198891,
+    5369198894,
+    5369198895,
+    5369198892,
+    5369198896,
+    5369198893,
+    5369198906,
+    5369198907,
+    5369198869
+  ],
+  "tags": {
+    "building": "yes",
+    "name": "PLAZA SENDERO",
+    "shop": "mall",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 556922282,
+  "center": {
+    "lat": 27.5037411,
+    "lon": -109.9177570
+  },
+  "nodes": [
+    5371795706,
+    5371795707,
+    5371795708,
+    5371795709,
+    5371795706
+  ],
+  "tags": {
+    "amenity": "school"
+  }
+},
+{
+  "type": "way",
+  "id": 556922286,
+  "center": {
+    "lat": 27.4955968,
+    "lon": -109.9209391
+  },
+  "nodes": [
+    5371795732,
+    5371795733,
+    5371795734,
+    5371795735,
+    5371795736,
+    5371795737,
+    5371795738,
+    5371795739,
+    5371795740,
+    5371795741,
+    5371795742,
+    5371795743,
+    5371795732
+  ],
+  "tags": {
+    "amenity": "school"
+  }
+},
+{
+  "type": "way",
+  "id": 556936643,
+  "center": {
+    "lat": 27.4969504,
+    "lon": -109.9333557
+  },
+  "nodes": [
+    5371938178,
+    5371938134,
+    5371938197,
+    5371938195,
+    5371938194,
+    5371938180,
+    5371938181,
+    5371938182,
+    5371938183,
+    5371938184,
+    5371938179,
+    5371938185,
+    5371938177,
+    5371938186,
+    5371938193,
+    5371938187,
+    5371938173,
+    5371938196,
+    5371938188,
+    5371938189,
+    5371938190,
+    5371938191,
+    5371938192,
+    5371938135,
+    5371938178
+  ],
+  "tags": {
+    "historic": "memorial",
+    "name": "Reloj del Sol"
+  }
+},
+{
+  "type": "way",
+  "id": 556936648,
+  "center": {
+    "lat": 27.4971564,
+    "lon": -109.9322121
+  },
+  "nodes": [
+    5371938224,
+    5371938225,
+    5371938226,
+    5371938227,
+    5371938228,
+    5371938229,
+    5371938230,
+    5371938231,
+    5371938224
+  ],
+  "tags": {
+    "amenity": "townhall",
+    "building": "yes",
+    "name": "Juzgados Civiles"
+  }
+},
+{
+  "type": "way",
+  "id": 556936650,
+  "center": {
+    "lat": 27.4964564,
+    "lon": -109.9321540
+  },
+  "nodes": [
+    5371938238,
+    5371938239,
+    5371938240,
+    5371938241,
+    5371938242,
+    5371938243,
+    5371938244,
+    5371938245,
+    5371938246,
+    5371938247,
+    5371938248,
+    5371938249,
+    5371938250,
+    5371938238
+  ],
+  "tags": {
+    "amenity": "townhall",
+    "building": "yes",
+    "name": "Palacio Municipal Ciudad Obregon"
+  }
+},
+{
+  "type": "way",
+  "id": 562396870,
+  "center": {
+    "lat": 27.4971123,
+    "lon": -109.9307495
+  },
+  "nodes": [
+    5421853467,
+    5421853472,
+    5421853477,
+    5421853473,
+    5421853474,
+    5421853467
+  ],
+  "tags": {
+    "building": "yes",
+    "name": "Hotel Cuenca de Sol",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 562396888,
+  "center": {
+    "lat": 27.4983031,
+    "lon": -109.9300821
+  },
+  "nodes": [
+    5421853568,
+    5421853569,
+    5421853570,
+    5421853571,
+    5421853572,
+    5421853573,
+    5421853574,
+    5421853575,
+    5421853568
+  ],
+  "tags": {
+    "brand": "Wyndham Garden",
+    "brand:wikidata": "Q112144847",
+    "building": "yes",
+    "name": "Wyndham Garden",
+    "tourism": "hotel"
+  }
+},
+{
+  "type": "way",
+  "id": 562424536,
+  "center": {
+    "lat": 27.4994572,
+    "lon": -109.9295207
+  },
+  "nodes": [
+    5422057844,
+    5422057845,
+    5422057846,
+    5422057847,
+    5422057844
+  ],
+  "tags": {
+    "amenity": "fuel"
+  }
+},
+{
+  "type": "way",
+  "id": 563785605,
+  "center": {
+    "lat": 27.4951903,
+    "lon": -109.9324496
+  },
+  "nodes": [
+    5432736642,
+    5432736645,
+    5432736648,
+    5432736643,
+    5432736644,
+    5432736642
+  ],
+  "tags": {
+    "amenity": "school",
+    "name": "CNCI"
+  }
+},
+{
+  "type": "way",
+  "id": 563785658,
+  "center": {
+    "lat": 27.4922831,
+    "lon": -109.9282490
+  },
+  "nodes": [
+    5432736823,
+    5432736824,
+    5432736825,
+    5432736826,
+    5432736823
+  ],
+  "tags": {
+    "amenity": "fuel"
+  }
+},
+{
+  "type": "way",
+  "id": 563785659,
+  "center": {
+    "lat": 27.4920553,
+    "lon": -109.9282389
+  },
+  "nodes": [
+    5432736827,
+    5432736828,
+    5432736829,
+    5432736830,
+    5432736827
+  ],
+  "tags": {
+    "amenity": "fuel"
+  }
+},
+{
+  "type": "way",
+  "id": 563789026,
+  "center": {
+    "lat": 27.5144117,
+    "lon": -109.9275306
+  },
+  "nodes": [
+    5432760483,
+    5432760484,
+    5432760485,
+    5432760486,
+    5432760483
+  ],
+  "tags": {
+    "amenity": "fuel"
+  }
+},
+{
+  "type": "way",
+  "id": 563910453,
+  "center": {
+    "lat": 27.5006712,
+    "lon": -109.9616152
+  },
+  "nodes": [
+    5433817436,
+    5433817437,
+    5433817438,
+    5433817439,
+    5433817436
+  ],
+  "tags": {
+    "addr:street": "Avenida José María Morelos y Pavón",
+    "amenity": "school",
+    "name": "Escuela Primaria Salvador Allende"
+  }
+},
+{
+  "type": "way",
+  "id": 563910756,
+  "center": {
+    "lat": 27.4966849,
+    "lon": -109.9615933
+  },
+  "nodes": [
+    1836032099,
+    5433821324,
+    5433821325,
+    5433821326,
+    1836032099
+  ],
+  "tags": {
+    "addr:city": "Ciudad Obregon",
+    "addr:street": "Sahuaripa",
+    "amenity": "school",
+    "name": "Escuela Primaria y Jardin de Niños"
+  }
+},
+{
+  "type": "way",
+  "id": 563911611,
+  "center": {
+    "lat": 27.4993282,
+    "lon": -109.9604360
+  },
+  "nodes": [
+    5433828412,
+    5433828413,
+    5433828414,
+    5433828415,
+    5433828412
+  ],
+  "tags": {
+    "addr:street": "Avenida Náinari",
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "denomination": "protestant",
+    "name": "Templo de los santos de los ultimos dias",
+    "religion": "multifaith"
+  }
+},
+{
+  "type": "way",
+  "id": 573331750,
+  "center": {
+    "lat": 27.5019775,
+    "lon": -109.9560346
+  },
+  "nodes": [
+    5506840649,
+    5506840650,
+    5506840651,
+    5506840652,
+    5506840649
+  ],
+  "tags": {
+    "addr:city": "Obregon",
+    "addr:postcode": "85110",
+    "addr:street": "Morelos",
+    "amenity": "school",
+    "name": "Secundaria General #6"
+  }
+},
+{
+  "type": "way",
+  "id": 598376905,
+  "center": {
+    "lat": 27.5060423,
+    "lon": -109.9515849
+  },
+  "nodes": [
+    5695165752,
+    5695165753,
+    8083389667,
+    8083389666,
+    8083389668,
+    1835824769,
+    5695165754,
+    5695165752
+  ],
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "ISSSTE"
+  }
+},
+{
+  "type": "way",
+  "id": 620503391,
+  "center": {
+    "lat": 27.5346654,
+    "lon": -109.9602807
+  },
+  "nodes": [
+    5862388046,
+    5862388047,
+    5862388048,
+    5862388049,
+    5862388046
+  ],
+  "tags": {
+    "amenity": "university"
+  }
+},
+{
+  "type": "way",
+  "id": 620503405,
+  "center": {
+    "lat": 27.4931987,
+    "lon": -109.9572762
+  },
+  "nodes": [
+    5862388208,
+    5862388209,
+    5862388210,
+    5862388204,
+    5862388208
+  ],
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital"
+  }
+},
+{
+  "type": "way",
+  "id": 620503406,
+  "center": {
+    "lat": 27.4856896,
+    "lon": -109.9604122
+  },
+  "nodes": [
+    5862388211,
+    5862388212,
+    5862388218,
+    5862388213,
+    5866621325,
+    5866621322,
+    5862388214,
+    5862388220,
+    5862388215,
+    5862388216,
+    5866621419,
+    5862388211
+  ],
+  "tags": {
+    "amenity": "school"
+  }
+},
+{
+  "type": "way",
+  "id": 620648785,
+  "center": {
+    "lat": 27.4833551,
+    "lon": -109.9571603
+  },
+  "nodes": [
+    5863663774,
+    5863663775,
+    5863663776,
+    5863663777,
+    5863663774
+  ],
+  "tags": {
+    "building": "yes",
+    "shop": "mall"
+  }
+},
+{
+  "type": "way",
+  "id": 620648807,
+  "center": {
+    "lat": 27.4832788,
+    "lon": -109.9606903
+  },
+  "nodes": [
+    5863664074,
+    5863664075,
+    5863664076,
+    5863664077,
+    5866621328,
+    5863664074
+  ],
+  "tags": {
+    "amenity": "fuel"
+  }
+},
+{
+  "type": "way",
+  "id": 620958930,
+  "center": {
+    "lat": 27.4837009,
+    "lon": -109.9701260
+  },
+  "nodes": [
+    5866329904,
+    5866329905,
+    5866329906,
+    5866329907,
+    5866329904
+  ],
+  "tags": {
+    "amenity": "school",
+    "name": "Centro de desarrollo Infantil (CENDI)"
+  }
+},
+{
+  "type": "way",
+  "id": 620962806,
+  "center": {
+    "lat": 27.4492815,
+    "lon": -109.9175542
+  },
+  "nodes": [
+    5866368044,
+    5866368045,
+    5866368046,
+    5866368047,
+    5866368044
+  ],
+  "tags": {
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "denomination": "catholic",
+    "name": "Iglesia De Valle Verde",
+    "religion": "christian"
+  }
+},
+{
+  "type": "way",
+  "id": 621254560,
+  "center": {
+    "lat": 27.4881718,
+    "lon": -109.9393151
+  },
+  "nodes": [
+    5868788268,
+    5868788269,
+    5868788270,
+    5868788271,
+    5868788268
+  ],
+  "tags": {
+    "amenity": "school"
+  }
+},
+{
+  "type": "way",
+  "id": 633486727,
+  "center": {
+    "lat": 27.4809845,
+    "lon": -109.9496911
+  },
+  "nodes": [
+    5980026279,
+    5980026280,
+    5980026281,
+    5980026282,
+    5980026279
+  ],
+  "tags": {
+    "amenity": "school"
+  }
+},
+{
+  "type": "way",
+  "id": 633487792,
+  "center": {
+    "lat": 27.4803768,
+    "lon": -109.9474691
+  },
+  "nodes": [
+    5980032818,
+    5980032819,
+    5980032817,
+    5980032821,
+    5980032818
+  ],
+  "tags": {
+    "amenity": "place_of_worship",
+    "building": "church",
+    "denomination": "roman_catholic",
+    "name": "Santo Niño de Atocha",
+    "religion": "christian"
+  }
+},
+{
+  "type": "way",
+  "id": 633488946,
+  "center": {
+    "lat": 27.4760130,
+    "lon": -109.9473502
+  },
+  "nodes": [
+    5980042180,
+    5980042181,
+    5980042182,
+    5980042183,
+    5980042180
+  ],
+  "tags": {
+    "amenity": "school",
+    "name": "Escuela primaria Club de leones"
+  }
+},
+{
+  "type": "way",
+  "id": 633489370,
+  "center": {
+    "lat": 27.4891714,
+    "lon": -109.9476897
+  },
+  "nodes": [
+    5980052386,
+    5980052387,
+    5980052388,
+    5980052389,
+    5980052386
+  ],
+  "tags": {
+    "amenity": "school"
+  }
+},
+{
+  "type": "way",
+  "id": 633490822,
+  "center": {
+    "lat": 27.4891714,
+    "lon": -109.9484228
+  },
+  "nodes": [
+    5980055621,
+    5980052386,
+    5980052387,
+    5980055622,
+    5980055621
+  ],
+  "tags": {
+    "amenity": "school"
+  }
+},
+{
+  "type": "way",
+  "id": 633490905,
+  "center": {
+    "lat": 27.4853823,
+    "lon": -109.9490705
+  },
+  "nodes": [
+    5980056083,
+    5980056084,
+    5980057285,
+    5980056082,
+    5980056083
+  ],
+  "tags": {
+    "amenity": "place_of_worship",
+    "building": "church",
+    "denomination": "catholic",
+    "name": "Parroquia Católica La Sagrada familia",
+    "religion": "christian"
+  }
+},
+{
+  "type": "way",
+  "id": 665558113,
+  "center": {
+    "lat": 27.4927058,
+    "lon": -109.9546298
+  },
+  "nodes": [
+    6229459596,
+    6229459597,
+    1834994249,
+    5422058119,
+    5422058120,
+    6229459596
+  ],
+  "tags": {
+    "leisure": "stadium",
+    "name": "Estadio Tomás Oroz Gaytán",
+    "note": "Cierre el 18 de enero de 2016",
+    "wikidata": "Q5400161",
+    "wikipedia": "es:Estadio Tomás Oroz Gaytán"
+  }
+},
+{
+  "type": "way",
+  "id": 677489918,
+  "center": {
+    "lat": 27.5310196,
+    "lon": -109.9349191
+  },
+  "nodes": [
+    6343593562,
+    6343593563,
+    6343593564,
+    6343593565,
+    6343593562
+  ],
+  "tags": {
+    "addr:city": "Ciudad Obregón",
+    "addr:housenumber": "2250",
+    "addr:postcode": "85010",
+    "addr:street": "Calle Veracruz",
+    "amenity": "school",
+    "name": "Instituto Senda"
+  }
+},
+{
+  "type": "way",
+  "id": 677500594,
+  "center": {
+    "lat": 27.4971865,
+    "lon": -109.9375750
+  },
+  "nodes": [
+    6343675490,
+    6343675491,
+    6343675492,
+    6343675493,
+    6343675490
+  ],
+  "tags": {
+    "addr:city": "Ciudad Obregón",
+    "addr:housenumber": "158",
+    "addr:postcode": "85000",
+    "addr:street": "Zacatecas",
+    "amenity": "university",
+    "internet_access": "yes",
+    "name": "Universidad TecMilenio"
+  }
+},
+{
+  "type": "way",
+  "id": 677500595,
+  "center": {
+    "lat": 27.4994374,
+    "lon": -109.9484441
+  },
+  "nodes": [
+    6343675494,
+    6343675495,
+    6343675496,
+    6343675497,
+    6343675494
+  ],
+  "tags": {
+    "amenity": "fuel",
+    "name": "Rendichicas"
+  }
+},
+{
+  "type": "way",
+  "id": 677500596,
+  "center": {
+    "lat": 27.5095188,
+    "lon": -109.9485182
+  },
+  "nodes": [
+    6343675498,
+    6343675499,
+    6343675500,
+    6343675501,
+    6343675502,
+    6343675503,
+    6343675498
+  ],
+  "tags": {
+    "amenity": "fuel",
+    "brand": "Chevron",
+    "brand:wikidata": "Q319642",
+    "brand:wikipedia": "en:Chevron Corporation",
+    "name": "Chevron"
+  }
+},
+{
+  "type": "way",
+  "id": 677503721,
+  "center": {
+    "lat": 27.4924237,
+    "lon": -109.9395146
+  },
+  "nodes": [
+    6343697379,
+    6343697380,
+    6343697381,
+    6343697382,
+    6343697383,
+    6343697384,
+    6343697485,
+    6343697486,
+    8140762476,
+    6343697487,
+    6343697488,
+    6343697489,
+    6343697379
+  ],
+  "tags": {
+    "addr:city": "Ciudad Obregón",
+    "addr:housenumber": "100",
+    "addr:postcode": "85000",
+    "addr:street": "Coahuila",
+    "amenity": "hospital",
+    "building": "yes",
+    "healthcare": "hospital",
+    "name": "Hospital San José",
+    "phone": "+52 644 410 9570",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 677990374,
+  "center": {
+    "lat": 27.4761626,
+    "lon": -109.9251596
+  },
+  "nodes": [
+    6348208627,
+    6348208633,
+    6348208630,
+    6348208628,
+    6348208627
+  ],
+  "tags": {
+    "amenity": "school"
+  }
+},
+{
+  "type": "way",
+  "id": 677990375,
+  "center": {
+    "lat": 27.4756702,
+    "lon": -109.9250172
+  },
+  "nodes": [
+    6348208628,
+    6348208629,
+    6348208631,
+    6348208632,
+    6348208627,
+    6348208628
+  ],
+  "tags": {
+    "amenity": "school"
+  }
+},
+{
+  "type": "way",
+  "id": 677990386,
+  "center": {
+    "lat": 27.4872158,
+    "lon": -109.9100718
+  },
+  "nodes": [
+    6348208660,
+    6348208658,
+    6348208659,
+    1887759137,
+    6348208660
+  ],
+  "tags": {
+    "amenity": "fuel",
+    "brand": "Pemex",
+    "brand:wikidata": "Q871308",
+    "brand:wikipedia": "en:Pemex",
+    "building": "roof",
+    "name": "Pemex"
+  }
+},
+{
+  "type": "way",
+  "id": 694348874,
+  "center": {
+    "lat": 27.4416044,
+    "lon": -109.9307884
+  },
+  "nodes": [
+    6518961681,
+    6518961682,
+    6518961683,
+    6518961684,
+    6518961681
+  ],
+  "tags": {
+    "amenity": "place_of_worship",
+    "building": "yes",
+    "denomination": "jehovahs_witness",
+    "name": "Salon del reino de los testigos de Jehová",
+    "religion": "christian"
+  }
+},
+{
+  "type": "relation",
+  "id": 11334272,
+  "center": {
+    "lat": 27.5274524,
+    "lon": -109.9511073
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 556552245,
+      "role": "inner"
+    },
+    {
+      "type": "way",
+      "ref": 828729459,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 828729460,
+      "role": "inner"
+    },
+    {
+      "type": "way",
+      "ref": 828729463,
+      "role": "inner"
+    },
+    {
+      "type": "way",
+      "ref": 828729464,
+      "role": "inner"
+    },
+    {
+      "type": "way",
+      "ref": 620742756,
+      "role": "inner"
+    }
+  ],
+  "tags": {
+    "leisure": "stadium",
+    "name": "Estadio Yaquis",
+    "type": "multipolygon"
+  }
+}
+
+  ]
+}

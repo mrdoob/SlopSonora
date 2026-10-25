@@ -5,7 +5,8 @@ import {
   getIslandBoundsAtZ,
   isTypingInField,
   blockAt,
-  streetZ
+  PLAYER_SPAWN,
+  PLAYER_LABELS
 } from './city-config.js';
 import { cityUniforms, createCarPaintMaterial, createContactShadowMaterial } from './tsl-materials.js';
 import {
@@ -31,8 +32,9 @@ import { bryantParkLawn } from './landmarks.js';
 // 3. Cyclist (Sculpted Road Cyclist with Drop-Bar Frame & Aero Helmet)
 // 4. Helicopter (Manhattan Sightseeing Twin-Turbine Chopper)
 
-// Spawn on 5th Ave at 37th St, facing south down the avenue toward the Empire State Building (34th St)
-const SPAWN_Z = streetZ(37);
+// Spawn on the city's chosen street (city-config.js PLAYER_SPAWN: the centreline of a north-south street), facing south
+const SPAWN_X = PLAYER_SPAWN.x;
+const SPAWN_Z = PLAYER_SPAWN.z;
 const groundCollider = { type: 'ground' };
 
 const CAR_DRIVE = {
@@ -452,11 +454,11 @@ class ThirdPersonControllerManager {
 
     return {
       type: 'person',
-      label: 'Pedestrian',
+      label: PLAYER_LABELS.person,
       mesh: root,
       crowd,
       rig,
-      position: new THREE.Vector3(-11.6, ISLAND_BOUNDS.sidewalkHeight, SPAWN_Z + 12),
+      position: new THREE.Vector3(SPAWN_X - 11.6, ISLAND_BOUNDS.sidewalkHeight, SPAWN_Z + 12),
       heading: 0,
       speed: 0,
       verticalVel: 0,
@@ -558,13 +560,13 @@ class ThirdPersonControllerManager {
 
     return {
       type: 'car',
-      label: 'NYC Yellow Taxi',
+      label: PLAYER_LABELS.car,
       mesh: root,
       chassisPivot,
       carState,
       headLights,
       wheels,
-      position: new THREE.Vector3(3.6, 0.0, SPAWN_Z + 12),
+      position: new THREE.Vector3(SPAWN_X + 3.6, 0.0, SPAWN_Z + 12),
       heading: 0,
       speed: 0,
       vx: 0,
@@ -719,7 +721,7 @@ class ThirdPersonControllerManager {
 
     return {
       type: 'cyclist',
-      label: 'NYC Bike Lane Cyclist',
+      label: PLAYER_LABELS.cyclist,
       mesh: root,
       leanPivot,
       frontWheel,
@@ -731,7 +733,7 @@ class ThirdPersonControllerManager {
       riderRig,
       helmet,
       headLight,
-      position: new THREE.Vector3(5.2, 0.0, SPAWN_Z - 8),
+      position: new THREE.Vector3(SPAWN_X + 5.2, 0.0, SPAWN_Z - 8),
       heading: 0,
       speed: 0,
       leanAngle: 0,
@@ -810,12 +812,12 @@ class ThirdPersonControllerManager {
 
     return {
       type: 'helicopter',
-      label: 'Sightseeing Helicopter',
+      label: PLAYER_LABELS.helicopter,
       mesh: root,
       tiltPivot,
       mainRotorPivot,
       tailRotorPivot,
-      position: new THREE.Vector3(-110, 96, SPAWN_Z - 60),
+      position: new THREE.Vector3(SPAWN_X - 110, 96, SPAWN_Z - 60),
       heading: 0.62,
       speed: 0,
       verticalSpeed: 0,

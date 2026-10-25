@@ -752,7 +752,20 @@ function walkSignal(time, isAvenue) {
   return t < walk;
 }
 
+// The city these modules describe (it keys the saved player positions, main.js) and where a first visit starts: on
+// 5th Ave at 37th St, facing south down the avenue toward the Empire State Building (34th St) (controllers.js)
+const CITY_ID = 'nyc';
+const PLAYER_SPAWN = { x: 0, z: streetZ(37) };
+// What the HUD calls the player in each mode
+const PLAYER_LABELS = { person: 'Pedestrian', car: 'NYC Yellow Taxi', cyclist: 'NYC Bike Lane Cyclist', helicopter: 'Sightseeing Helicopter' };
+// How much the street canyons shade street level from the sky (tsl-materials.js canyonSkyAONode): fully, in Manhattan
+const STREET_CANYON = 1.0;
+
 export {
+  CITY_ID,
+  PLAYER_SPAWN,
+  PLAYER_LABELS,
+  STREET_CANYON,
   AVENUES,
   ALL_AVENUES,
   CENTRAL_PARK_BOUNDS,

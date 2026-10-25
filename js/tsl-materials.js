@@ -62,6 +62,7 @@ import {
   getIslandBoundsAtZ,
   NJ_SHORELINE_POLYGON,
   LONG_ISLAND_POLYGONS,
+  STREET_CANYON,
   streetZ
 } from './city-config.js';
 
@@ -176,7 +177,8 @@ const canyonSkyAONode = Fn(() => {
   const heightOpenness = smoothstep(0.0, 68.0, wp.y);
   const streetCrevice = smoothstep(0.0, 7.5, wp.y).mul(0.22).add(0.78);
   const canyonAO = mix(float(0.44), float(1.0), heightOpenness).mul(streetCrevice);
-  return mix(canyonAO, float(1.0), inPark);
+  // (a low-rise city's streets are as deep as STREET_CANYON of Manhattan's, city-config.js)
+  return mix(mix(float(1.0), canyonAO, STREET_CANYON), float(1.0), inPark);
 });
 
 // Material caches to prevent duplicate WebGPU WGSL shader compilation across blocks & landmarks

@@ -5,6 +5,7 @@ const test = require('node:test');
 const { loadModule } = require('./helpers/module.cjs');
 
 const source = readFileSync(join(__dirname, '../js/cameras.js'), 'utf8');
+const shots = loadModule(readFileSync(join(__dirname, '../js/camera-shots.js'), 'utf8'), { imports: { './landmarks.js': {} } });
 
 class Vector3 {
   constructor(x = 0, y = 0, z = 0) { this.set(x, y, z); }
@@ -59,7 +60,7 @@ function cameraHarness(entity = {
   window.innerHeight = 900;
   const { CameraSystem } = loadModule(source, {
     globals: { window, document },
-    imports: { 'three/webgpu': { Vector3, PerspectiveCamera }, './landmarks.js': {} }
+    imports: { 'three/webgpu': { Vector3, PerspectiveCamera }, './camera-shots.js': shots }
   });
   const camera = new CameraSystem(canvas, { getActiveEntity: () => entity });
   return {
