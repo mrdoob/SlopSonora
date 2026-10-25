@@ -3,21 +3,18 @@ import { uniform, color, float, smoothstep } from 'three/tsl';
 import { GEO } from './geodata.js';
 import { ISLAND_BOUNDS, PARKS, WATER, blockAt, pointInPoly, signalPhase } from './city-config.js';
 import { rng } from './lots.js';
+import { SIGNAL_SITES } from './signals.js';
 import { cityUniforms } from '../tsl-materials.js';
 import { createTreeField } from '../trees.js';
 
 // js/obregon/street-details.js
 // Ciudad Obregón's street furniture, in place of js/street-details.js:
-// - Traffic signals where two main streets (tertiary and up) cross, plus the ones OpenStreetMap maps: a pole on the far
-//   right corner of every approach with a three-lamp head facing the oncoming traffic. Each intersection's widest road
-//   runs on the "avenue" phase of the shared two-phase clock (city-config.js signalPhase), the others on the "street"
-//   phase, as traffic.js expects of its right-of-way groups.
+// - Traffic signals at the sites signals.js picks: a pole on the far right corner of every approach with a three-lamp head facing the oncoming traffic. The north-south street (or, off
+//   the grid, the widest road) runs on the "avenue" phase of the shared two-phase clock (city-config.js signalPhase),
+//   the others on the "street" phase, as road-network.js groups them for traffic.js.
 // - Cobra-head street lights along every street, alternating sides, lit at dusk.
 // - Street trees on the sidewalks and trees scattered through the parks (trees.js; honey locusts standing in for the
 //   mesquites & palo verdes, plane trees for the laureles de la India).
-
-const MAJOR = new Set(['trunk', 'primary', 'secondary', 'tertiary']);
-const MERGE = 14; // m: junctions this close are one intersection (as js/road-network.js collapses them)
 
 function buildStreetDetails(scene) {
   const group = new THREE.Group();
@@ -27,11 +24,10 @@ function buildStreetDetails(scene) {
   const footprints = [];
   const RG = GEO.roadGraph;
   const N = RG.nodes;
-  const nodeCount = N.length / 2;
   const P = (i) => ({ x: N[i * 2], z: N[i * 2 + 1] });
 
   // Links with their polylines & lengths
-  const links = RG.links.map(([a, b, ni, w, lanes, dir, inner, k]) => {
+  const links = RG.links.map(([a, b, ni, w, , , inner, k]) => {
     const pts = [P(a)];
     for (let i = 0; i < inner.length; i += 2) pts.push({ x: inner[i], z: inner[i + 1] });
     pts.push(P(b));
@@ -74,64 +70,9 @@ function buildStreetDetails(scene) {
   };
 
   // ---------------------------------------------------------------------------------------------------------------
-  // 1. Signalized intersections
+  // 1. Signal heads at the signalized intersections (signals.js)
   // ---------------------------------------------------------------------------------------------------------------
-  const parent = Array.from({ length: nodeCount }, (_, i) => i);
-  const find = (i) => (parent[i] === i ? i : (parent[i] = find(parent[i])));
-  for (const l of links) if (l.len < MERGE) parent[find(l.a)] = find(l.b);
-  const clusters = new Map();
-  for (const l of links) {
-    for (const end of [l.a, l.b]) {
-      const r = find(end);
-      if (!clusters.has(r)) clusters.set(r, { nodes: new Set(), arms: [] });
-      clusters.get(r).nodes.add(end);
-    }
-  }
-  for (const c of clusters.values()) {
-    let x = 0, z = 0;
-    for (const i of c.nodes) { x += N[i * 2]; z += N[i * 2 + 1]; }
-    c.x = x / c.nodes.size;
-    c.z = z / c.nodes.size;
-  }
-  // arms: the links leaving each cluster, pointing away from it
-  for (const l of links) {
-    const ra = find(l.a), rb = find(l.b);
-    if (ra === rb) continue;
-    for (const [r, from] of [[ra, 0], [rb, 1]]) {
-      const pts = from === 0 ? l.pts : [...l.pts].reverse();
-      // direction from the cluster to the point ~15 m along the link
-      let q = pts[pts.length - 1];
-      let acc = 0;
-      for (let i = 1; i < pts.length; i++) {
-        acc += Math.hypot(pts[i].x - pts[i - 1].x, pts[i].z - pts[i - 1].z);
-        if (acc >= 15) { q = pts[i]; break; }
-      }
-      const c = clusters.get(r);
-      const ux = q.x - c.x, uz = q.z - c.z;
-      const L = Math.hypot(ux, uz) || 1;
-      c.arms.push({ ux: ux / L, uz: uz / L, half: l.half, kind: l.kind, name: l.name });
-    }
-  }
-  const mappedSignals = [];
-  for (let i = 0; i < GEO.signals.length; i += 2) mappedSignals.push({ x: GEO.signals[i], z: GEO.signals[i + 1] });
-  const signalized = [];
-  for (const c of clusters.values()) {
-    if (c.arms.length < 3) continue;
-    const majorNames = new Set(c.arms.filter((a) => MAJOR.has(a.kind)).map((a) => a.name || a.kind));
-    const mapped = mappedSignals.some((s) => Math.hypot(s.x - c.x, s.z - c.z) < 30);
-    if (majorNames.size < 2 && !mapped) continue;
-    // roads: arms within 20° merge (divided roads), then pair up the opposite ones
-    const roads = [];
-    for (const a of c.arms) {
-      const r = roads.find((r) => Math.abs(r.ux * a.ux + r.uz * a.uz) > 0.82);
-      if (r) r.half = Math.max(r.half, a.half);
-      else roads.push({ ux: a.ux, uz: a.uz, half: a.half });
-    }
-    if (roads.length < 2) continue;
-    // the widest road runs on the avenue phase (traffic.js: group 0, the widest road at a centreline junction)
-    roads.sort((p, q) => q.half - p.half);
-    signalized.push({ ...c, main: roads[0], roads });
-  }
+  const signalized = SIGNAL_SITES;
 
   const poleMatrices = [];
   const headMatrices = [];
@@ -146,7 +87,9 @@ function buildStreetDetails(scene) {
     for (const a of s.arms) {
       if (seen.some((o) => o.ux * a.ux + o.uz * a.uz > 0.94)) continue;
       seen.push(a);
-      const isAve = Math.abs(a.ux * s.main.ux + a.uz * s.main.uz) > 0.82;
+      // the avenue phase: the north-south street where every road runs along the compass axes (as road-network.js
+      // groups such junctions, city-config.js CARDINAL_JUNCTIONS), else the widest road
+      const isAve = s.cardinal ? Math.abs(a.uz) > 0.966 : Math.abs(a.ux * s.main.ux + a.uz * s.main.uz) > 0.82;
       const cross = s.roads.filter((r) => Math.abs(r.ux * a.ux + r.uz * a.uz) < 0.82).reduce((m, r) => Math.max(m, r.half), 6);
       const own = s.roads.find((r) => Math.abs(r.ux * a.ux + r.uz * a.uz) >= 0.82)?.half ?? a.half;
       // traffic comes in along -u; its right is (uz, -ux)

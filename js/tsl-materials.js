@@ -699,10 +699,11 @@ function createPreWarBuildingMaterial(opts = {}) {
     crownGlowColor = 0xffe0a3,
     seed = 42.0,
     boxLocal = false,
-    cornerPier = 1.2 // solid masonry at both ends of every wall above the shopfronts (box-local mode)
+    cornerPier = 1.2, // solid masonry at both ends of every wall above the shopfronts (box-local mode)
+    stucco = false // smooth painted render instead of brick & stone coursing: no mortar, no brick relief, no ghost signs
   } = opts;
 
-  const cacheKey = `${stoneColor}_${trimColor}_${windowWidth}_${floorHeight}_${litProbability}_${warmth}_${crownGlowHeight}_${seed}_${boxLocal}_${cornerPier}`;
+  const cacheKey = `${stoneColor}_${trimColor}_${windowWidth}_${floorHeight}_${litProbability}_${warmth}_${crownGlowHeight}_${seed}_${boxLocal}_${cornerPier}_${stucco}`;
   if (_preWarCache.has(cacheKey)) {
     return _preWarCache.get(cacheKey);
   }
@@ -813,18 +814,21 @@ function createPreWarBuildingMaterial(opts = {}) {
     const colCoord = uCoord.div(brickL).add(mod(courseRow, 2.0).mul(0.5));
     // Rear, court & lot-line walls are plain common brick (red-brown or buff by building); lot-line walls weather in
     // patches of grey parging (worked out on those walls only), some are parged all over
-    const backBrick = mix(
-      mix(color(0x6c3d30), color(0x8a503e), fract(tone.mul(7.31))),
-      mix(color(0x9a8669), color(0xb09a7a), fract(tone.mul(5.17))),
-      step(0.58, tone)
-    );
+    const backBrick = stucco
+      // rendered block walls: the front's paint gone dull, or bare grey cement render
+      ? mix(cStone.mul(0.88), mix(color(0xa8a297), color(0xbdb6a8), fract(tone.mul(5.17))), step(0.55, tone))
+      : mix(
+        mix(color(0x6c3d30), color(0x8a503e), fract(tone.mul(7.31))),
+        mix(color(0x9a8669), color(0xb09a7a), fract(tone.mul(5.17))),
+        step(0.58, tone)
+      );
     const parged = float(0.0).toVar();
     If(blank.mul(back).greaterThan(0.5), () => {
       const pargePatch = smoothstep(0.6, 0.76, noise2D(vec2(uCoord.mul(0.11), vCoord.mul(0.07)).add(tone.mul(37.0))));
       parged.assign(max(step(0.74, fract(tone.mul(3.7))), pargePatch.mul(0.85)));
     });
     const backTint = mix(backBrick, color(0x8f8b84), parged);
-    const mortarJoint = max(
+    const mortarJoint = stucco ? float(0.0) : max(
       gridLine(colCoord.mul(brickL), brickL, 0.016),
       gridLine(vCoord, brickH, 0.016)
     ).mul(float(1.0).sub(isRoof)).mul(float(1.0).sub(parged)).mul(float(1.0).sub(coping));
@@ -833,8 +837,11 @@ function createPreWarBuildingMaterial(opts = {}) {
     const uFw = fwidth(uCoord);
     const brickVar = float(1.0).sub(smoothstep(0.5, 1.0, max(uFw.div(brickL), fwidth(rowCoord))));
     const brickCell = vec2(floor(colCoord), courseRow);
-    const brickRnd = hash2D(brickCell.add(vec2(uSeed, 5.3))).sub(0.5).mul(brickVar);
-    const brickWarmShift = hash2D(brickCell.add(vec2(17.1, uSeed))).sub(0.5).mul(0.12).mul(brickVar);
+    // (render: a trowelled, sun-faded plaster mottle instead of brick-to-brick tint)
+    const brickRnd = stucco
+      ? noise2D(vec2(uCoord.mul(0.9), vCoord.mul(0.9)).add(uSeed)).sub(0.5).mul(0.5).mul(brickVar)
+      : hash2D(brickCell.add(vec2(uSeed, 5.3))).sub(0.5).mul(brickVar);
+    const brickWarmShift = stucco ? float(0.0) : hash2D(brickCell.add(vec2(17.1, uSeed))).sub(0.5).mul(0.12).mul(brickVar);
     const brickShiftVec = vec3(float(1.0).add(brickWarmShift), float(1.0), float(1.0).sub(brickWarmShift));
 
     const streakNoise = mix(float(0.5), noise2D(vec2(uCoord.mul(1.4), vCoord.mul(0.05))), float(1.0).sub(smoothstep(0.5, 1.0, uFw.mul(1.4))));
@@ -856,7 +863,7 @@ function createPreWarBuildingMaterial(opts = {}) {
     // over a smaller one, flaking off the brick. The lettering is only worked out inside the panel.
     const signW = min(wallW.sub(3.0), 18.0);
     const signH = min(min(wallH.mul(0.3), signW.mul(0.42)), 6.5);
-    const hasSign = blank.mul(back).mul(float(1.0).sub(step(0.74, fract(tone.mul(3.7)))))
+    const hasSign = (stucco ? float(0.0) : float(1.0)).mul(blank).mul(back).mul(float(1.0).sub(step(0.74, fract(tone.mul(3.7)))))
       .mul(step(0.8, fract(tone.mul(13.7).add(boxSeed.mul(0.618)))))
       .mul(step(5.0, signW)).mul(step(2.6, signH));
     const su = wallS.sub(wallW.sub(signW).mul(0.5)).div(signW); // 0..1 across the panel
@@ -993,7 +1000,7 @@ function createPreWarBuildingMaterial(opts = {}) {
     const colCoord = uCoord.div(brickL).add(mod(courseRow, 2.0).mul(0.5));
     const distU = float(0.5).sub(abs(fract(colCoord).sub(0.5))).mul(brickL);
     const distV = float(0.5).sub(abs(fract(rowCoord).sub(0.5))).mul(brickH);
-    const brickDome = smoothstep(0.0, 0.018, distU).mul(smoothstep(0.0, 0.018, distV)).mul(0.0045)
+    const brickDome = stucco ? float(0.0) : smoothstep(0.0, 0.018, distU).mul(smoothstep(0.0, 0.018, distV)).mul(0.0045)
       .mul(float(1.0).sub(smoothstep(0.006, 0.012, footprint)));
 
     const sillLedge = filteredPulse(cellUV.y, effHalfY.sub(0.032), effHalfY, ramp.y).mul(inX).mul(0.016);

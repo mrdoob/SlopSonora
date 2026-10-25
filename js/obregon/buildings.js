@@ -62,7 +62,7 @@ function buildCityBlocks(scene) {
     const mat = createPreWarBuildingMaterial({
       stoneColor: stone, trimColor: trim, windowGlassColor: 0x1d2a33, windowWidth: 3.3, floorHeight: 3.15,
       windowRatioX: 0.42, windowRatioY: 0.5, litProbability: 0.4, warmth: 0.9, seed: 11 + i * 7, boxLocal: true,
-      cornerPier: 0.5
+      cornerPier: 0.5, stucco: true
     });
     const mesh = createFacadeBoxes(mat, boxesByStyle[i]);
     mesh.name = `ObregonHouses_${i}`;

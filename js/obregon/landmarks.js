@@ -1,6 +1,6 @@
 import * as THREE from 'three/webgpu';
 import { GEO } from './geodata.js';
-import { ISLAND_BOUNDS } from './city-config.js';
+import { ISLAND_BOUNDS, polygonStrips } from './city-config.js';
 import { createPreWarBuildingMaterial, createCurtainWallMaterial } from '../tsl-materials.js';
 
 // js/obregon/landmarks.js
@@ -17,9 +17,9 @@ const KIND_HEIGHT = {
 
 // Facade styles: whitewashed civic & religious stucco, warm institutional stucco, glazed commercial
 const STYLES = {
-  civic: { stoneColor: 0xf1ebdc, trimColor: 0xb59f78, seed: 3 },
-  institution: { stoneColor: 0xe0c8a0, trimColor: 0x9c7b52, seed: 5 },
-  shed: { stoneColor: 0xc9c5bc, trimColor: 0x8b877f, seed: 9 }
+  civic: { stoneColor: 0xf1ebdc, trimColor: 0xb59f78, seed: 3, stucco: true },
+  institution: { stoneColor: 0xe0c8a0, trimColor: 0x9c7b52, seed: 5, stucco: true },
+  shed: { stoneColor: 0xc9c5bc, trimColor: 0x8b877f, seed: 9, stucco: true }
 };
 function styleOf(kind) {
   if (/place_of_worship|church|cathedral|chapel|townhall|courthouse|civic|library/.test(kind)) return 'civic';
@@ -28,41 +28,7 @@ function styleOf(kind) {
 }
 
 // The malls, supermarkets & cinemas get glazed fronts
-const GLASS = /^(Plaza Obregón|Plaza Tutuli|Soriana|Walmart|Sam's Club|Liverpool|Cinépolis|Cinepolis|Cinemex)/;
-
-// Colliders that follow a footprint of any shape (courtyards, L- & U-shaped wings, footprints turned off the grid):
-// axis-aligned strips, one per run of 2.5 m scanlines crossing the same stretch of it
-const STRIP = 2.5;
-function footprintStrips(poly) {
-  let minZ = Infinity, maxZ = -Infinity;
-  for (const p of poly) { minZ = Math.min(minZ, p.z); maxZ = Math.max(maxZ, p.z); }
-  const strips = [];
-  let open = []; // strips still growing: { minX, maxX, minZ, maxZ }
-  for (let z0 = minZ; z0 < maxZ; z0 += STRIP) {
-    const z1 = Math.min(maxZ, z0 + STRIP);
-    const zc = (z0 + z1) / 2;
-    const xs = [];
-    for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
-      const a = poly[i], c = poly[j];
-      if ((a.z > zc) !== (c.z > zc)) xs.push(a.x + ((zc - a.z) * (c.x - a.x)) / (c.z - a.z));
-    }
-    xs.sort((p, q) => p - q);
-    const next = [];
-    for (let k = 0; k + 1 < xs.length; k += 2) {
-      const prev = open.find((o) => Math.abs(o.minX - xs[k]) < 0.3 && Math.abs(o.maxX - xs[k + 1]) < 0.3);
-      if (prev) {
-        prev.maxZ = z1;
-        next.push(prev);
-      } else {
-        const o = { minX: xs[k], maxX: xs[k + 1], minZ: z0, maxZ: z1 };
-        strips.push(o);
-        next.push(o);
-      }
-    }
-    open = next;
-  }
-  return strips;
-}
+const GLASS = /^(Plaza Obregón|Plaza Tutuli|Soriana|Walmart|Sam's Club|Liverpool|Cinépolis|Cinepolis|Cinemex)\b/;
 
 // Bryant Park's lawn has no counterpart in Obregón (cameras.js & controllers.js read it)
 const bryantParkLawn = null;
@@ -93,7 +59,8 @@ function buildLandmarks(scene) {
     geo.deleteAttribute('uv');
     const style = GLASS.test(b.name) || /mall|cinema/.test(b.kind) ? 'glass' : styleOf(b.kind);
     geos[style].push(geo.index ? geo.toNonIndexed() : geo);
-    for (const c of footprintStrips(pts.map((p) => ({ x: p.x, z: -p.y })))) colliders.push({ ...c, minY: 0, maxY: SW + h });
+    // colliders that follow the footprint (courtyards, L- & U-shaped wings, footprints turned off the grid)
+    for (const c of polygonStrips(pts.map((p) => ({ x: p.x, z: -p.y })), 2.5)) colliders.push({ ...c, minY: 0, maxY: SW + h });
   }
 
   const materials = {

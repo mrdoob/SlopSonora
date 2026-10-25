@@ -153,7 +153,7 @@ function planLots() {
     const placed = [];
     // depth room: half the block's narrow side, so the lots from both fronts meet at the back
     const narrow = Math.min(b.maxX - b.minX, b.maxZ - b.minZ);
-    const maxDepth = Math.max(8, Math.min(narrow / 2 - 3.6, 32));
+    const maxDepth = Math.max(8, Math.min(narrow / 2 - 3.6, 42));
     // the longest fronts first: they're the streets the block faces (the short ends' lots fit in after)
     const order = L.map((_, i) => i).sort((i, j) => {
       const li = Math.hypot(L[(i + 1) % L.length].x - L[i].x, L[(i + 1) % L.length].z - L[i].z);
@@ -176,7 +176,8 @@ function planLots() {
         const lotW = commercial ? 6 + rand() * 7 : 8 + rand() * 7;
         const wid = Math.min(lotW, len - s - 0.2);
         if (wid < 4.5) break;
-        const depth = Math.min(maxDepth, commercial ? 15 + rand() * 13 : 12 + rand() * 10);
+        // houses fill most of their lot, leaving a back patio; shops & downtown buildings run deeper still
+        const depth = Math.min(maxDepth, commercial ? 18 + rand() * 18 : 15 + rand() * 13);
         const setback = commercial ? 0 : rand() < 0.55 ? 0 : 1.5 + rand() * 3; // a porch or front garden, or none
         const gap = commercial ? 0 : rand() < 0.5 ? 0 : 0.6 + rand() * 1.5; // a side yard
         const seed = rand();

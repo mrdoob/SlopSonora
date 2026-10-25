@@ -6,7 +6,8 @@ import {
   isTypingInField,
   blockAt,
   PLAYER_SPAWN,
-  PLAYER_LABELS
+  PLAYER_LABELS,
+  PLAYER_CAR
 } from './city-config.js';
 import { cityUniforms, createCarPaintMaterial, createContactShadowMaterial } from './tsl-materials.js';
 import {
@@ -478,8 +479,9 @@ class ThirdPersonControllerManager {
     const chassisPivot = new THREE.Group();
     root.add(chassisPivot);
 
-    const spec = BODY_SPECS.taxi;
-    const taxiLoftMat = createLoftedCarMaterial(spec, 0xffbe14);
+    // the city's car (city-config.js PLAYER_CAR): New York's medallion cab, or a plain sedan in the city's paint
+    const spec = BODY_SPECS[PLAYER_CAR.body];
+    const taxiLoftMat = createLoftedCarMaterial(spec, PLAYER_CAR.color);
 
     // 1. 3D Lofted Taxi Body + Curved Windscreens + Crowned Roof + Side Mirrors + Roof Sign
     const carBodyGeo = buildCarGeometry(spec, false);
@@ -499,7 +501,7 @@ class ThirdPersonControllerManager {
       polygonOffsetUnits: -2
     });
     const doorMid = (spec.doors[0] + spec.doors[1]) / 2;
-    for (const side of [-1, 1]) {
+    for (const side of PLAYER_CAR.nycLivery ? [-1, 1] : []) {
       const decal = new THREE.Mesh(buildCarSidePatch(spec, side, doorMid - 0.36, doorMid + 0.36, 0.53, 0.81, 0.003), doorDecalMat);
       chassisPivot.add(decal);
     }
@@ -509,11 +511,11 @@ class ThirdPersonControllerManager {
     const nyPlateMat = new THREE.MeshStandardNodeMaterial({ map: nyPlateTex, roughness: 0.28 });
     const rearPlate = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.14, 0.02), nyPlateMat);
     rearPlate.position.set(0, spec.plates[1], spec.zRear - 0.006);
-    chassisPivot.add(rearPlate);
+    if (PLAYER_CAR.nycLivery) chassisPivot.add(rearPlate);
 
     const frontPlate = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.14, 0.02), nyPlateMat);
     frontPlate.position.set(0, spec.plates[0], spec.zFront + 0.006);
-    chassisPivot.add(frontPlate);
+    if (PLAYER_CAR.nycLivery) chassisPivot.add(frontPlate);
 
     // 3b. Brake lights, CHMSL & turn signals are lit by the taxi material from its carState uniform (see updateCar)
     const carState = taxiLoftMat.userData.carState;

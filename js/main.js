@@ -3,7 +3,7 @@ import { pass, mrt, output, normalView, positionView, metalness, roughness, vec2
 import { ssr } from 'three/addons/tsl/display/SSRNode.js';
 import { createPostProcessing } from './post-processing.js';
 import { ClusteredLighting } from 'three/addons/lighting/ClusteredLighting.js';
-import { getLocationLabel, isTypingInField, ROADS, NYC_LANDMARKS, TELEPORT_LOCATIONS, CITY_ID } from './city-config.js';
+import { getLocationLabel, isTypingInField, ROADS, NYC_LANDMARKS, TELEPORT_LOCATIONS, CITY_ID, HUD_UNITS } from './city-config.js';
 import { buildCityGrid } from './city-grid.js';
 import { buildBoroughs } from './boroughs.js';
 import { buildLandmarks } from './landmarks.js';
@@ -730,16 +730,18 @@ async function initApp() {
       const activeEnt = controllerManager.getActiveEntity();
       const mode = controllerManager.activeMode;
       const mph = Math.round(Math.abs(activeEnt.speed) * 2.237);
-      const altFt = Math.max(0, Math.round(activeEnt.position.y * 3.281));
+      // shown in the city's units (city-config.js HUD_UNITS: per m/s and per metre)
+      const shownSpeed = Math.round(Math.abs(activeEnt.speed) * HUD_UNITS.speed);
+      const shownAlt = Math.max(0, Math.round(activeEnt.position.y * HUD_UNITS.altitude));
 
       if (elFps) {
         elFps.textContent = String(currentFps);
         elFps.className = currentFps >= 50 ? 'fps-ok' : currentFps >= 30 ? 'fps-warn' : 'fps-bad';
       }
-      if (elSpeed) elSpeed.textContent = String(mph);
+      if (elSpeed) elSpeed.textContent = String(shownSpeed);
       if (elSpeedMeter) elSpeedMeter.style.transform = `scaleX(${Math.min(1, mph / (topSpeedMph[mode] || 80))})`;
       document.body.classList.toggle('is-boosting', controllerManager.keys.boost && mph > 0);
-      if (elAltitude) elAltitude.textContent = altFt.toLocaleString('en-US');
+      if (elAltitude) elAltitude.textContent = shownAlt.toLocaleString('en-US');
       // The street corner of the player on the follow cameras, of the camera itself on the scenic ones
       const where = cameraSystem.getActivePreset().category === 'follow' ? activeEnt.position : cameraSystem.currentPos;
       renderLocation(getLocationLabel(where.x, where.z));

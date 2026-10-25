@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { GEO } from '../js/obregon/geodata.js';
 import { BLOCKS, ROADS, TELEPORT_LOCATIONS, PLAYER_SPAWN, ISLAND_BOUNDS, blockAt, getLocationLabel, pointInPoly, WATER } from '../js/obregon/city-config.js';
 import { planLots, corners } from '../js/obregon/lots.js';
+import { SIGNAL_SITES } from '../js/obregon/signals.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 
@@ -139,4 +140,11 @@ test('the player starts on a street, and every teleport lies in the city', () =>
     assert.ok(t.x > ISLAND_BOUNDS.minX && t.x < ISLAND_BOUNDS.maxX && t.z > ISLAND_BOUNDS.minZ && t.z < ISLAND_BOUNDS.maxZ, key);
     assert.ok(!(t.x === 0 && t.z === 0) || key === 'plaza', `${key} found its landmark`);
   }
+});
+
+test('signals stand where main streets cross, mostly on the compass-aligned grid', () => {
+  assert.ok(SIGNAL_SITES.length > 100);
+  const cardinal = SIGNAL_SITES.filter((s) => s.cardinal);
+  assert.ok(cardinal.length > SIGNAL_SITES.length * 0.6);
+  for (const s of cardinal) assert.ok(s.hx > 0 && s.hz > 0, 'a grid junction has a north-south and an east-west road');
 });

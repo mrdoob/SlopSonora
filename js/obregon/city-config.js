@@ -83,6 +83,57 @@ function pointInPoly(P, x, z) {
   }
   return inside;
 }
+// A polygon as axis-aligned strips, one per run of `step`-deep scanline rows crossing the same stretch of it. Covering
+// (each row's crossings at its middle: may reach a little past slanted edges, for colliders) or `inside` (the
+// stretch common to its top, middle & bottom: never past the outline, for curb islands that bound the lanes)
+function polygonStrips(poly, step, inside = false) {
+  let minZ = Infinity, maxZ = -Infinity;
+  for (const p of poly) { minZ = Math.min(minZ, p.z); maxZ = Math.max(maxZ, p.z); }
+  const crossings = (z) => {
+    const xs = [];
+    for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+      const a = poly[i], c = poly[j];
+      if ((a.z > z) !== (c.z > z)) xs.push(a.x + ((z - a.z) * (c.x - a.x)) / (c.z - a.z));
+    }
+    xs.sort((p, q) => p - q);
+    const out = [];
+    for (let k = 0; k + 1 < xs.length; k += 2) out.push([xs[k], xs[k + 1]]);
+    return out;
+  };
+  const strips = [];
+  let open = [];
+  for (let z0 = minZ; z0 < maxZ - 1e-6; z0 += step) {
+    const z1 = Math.min(maxZ, z0 + step);
+    let spans = crossings((z0 + z1) / 2);
+    if (inside) {
+      const edges = [crossings(z0 + 0.01), crossings(z1 - 0.01)];
+      spans = spans.map(([a, b]) => {
+        for (const list of edges) {
+          const o = list.find(([c, d]) => c < b && d > a);
+          if (!o) return null;
+          a = Math.max(a, o[0]);
+          b = Math.min(b, o[1]);
+        }
+        return b - a > 0.5 ? [a, b] : null;
+      }).filter(Boolean);
+    }
+    const next = [];
+    for (const [a, b] of spans) {
+      const prev = open.find((o) => Math.abs(o.minX - a) < 0.3 && Math.abs(o.maxX - b) < 0.3);
+      if (prev) {
+        prev.maxZ = z1;
+        next.push(prev);
+      } else {
+        const o = { minX: a, maxX: b, minZ: z0, maxZ: z1 };
+        strips.push(o);
+        next.push(o);
+      }
+    }
+    open = next;
+  }
+  return strips;
+}
+
 // The block whose curb island holds (x, z), or null on the roadway
 function blockAt(x, z) {
   for (const b of blockCells.get(cellKey(Math.floor(x / BLOCK_CELL), Math.floor(z / BLOCK_CELL))) || []) {
@@ -241,8 +292,24 @@ const PLAYER_SPAWN = (() => {
   return best || { x: 395, z: -160 };
 })();
 
+// Signalized junctions of the (compass-aligned) street grid work like Manhattan's grid intersections: crosswalks, and
+// the north-south street on the avenue phase (road-network.js)
+const CARDINAL_JUNCTIONS = true;
+
+// The HUD's speed (km/h) & altitude (m), per m/s & per metre (obregon.html labels the units)
+const HUD_UNITS = { speed: 3.6, altitude: 1 };
+
+// Traffic: no New York cabs or NYPD cruisers; sedans & SUVs in the colours of a sunny city (white and silver first)
+const TRAFFIC_MIX = {
+  taxiEvery: 0, policeEvery: 0, taxiColor: 0xffbe14,
+  sedanPalette: [0xf2f2ee, 0xc9cdd2, 0x8a1c1c, 0x2b2f36, 0xe8e3d6, 0x2d4f7c, 0x9aa0a6],
+  suvPalette: [0xf4f4f0, 0xb8bdc3, 0x1e2126, 0x6b1a1a, 0x5d6b78, 0xd8d2c2]
+};
+
 // What the HUD calls the player in each mode
-const PLAYER_LABELS = { person: 'Pedestrian', car: 'Taxi', cyclist: 'Cyclist', helicopter: 'Helicopter' };
+const PLAYER_LABELS = { person: 'Pedestrian', car: 'Sedan', cyclist: 'Cyclist', helicopter: 'Helicopter' };
+// The player's car: a red sedan
+const PLAYER_CAR = { body: 'sedan', color: 0xa8231c, nycLivery: false };
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Signals: a two-phase clock shared by every signalized intersection (as in New York's configuration)
@@ -269,6 +336,10 @@ export {
   CITY_ID,
   PLAYER_SPAWN,
   PLAYER_LABELS,
+  PLAYER_CAR,
+  HUD_UNITS,
+  CARDINAL_JUNCTIONS,
+  TRAFFIC_MIX,
   STREET_CANYON,
   ISLAND_BOUNDS,
   getIslandBoundsAtZ,
@@ -288,6 +359,7 @@ export {
   streetZ,
   blockAt,
   pointInPoly,
+  polygonStrips,
   segDist,
   toPts,
   nearestRoads,

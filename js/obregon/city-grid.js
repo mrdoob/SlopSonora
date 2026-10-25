@@ -1,8 +1,9 @@
 import * as THREE from 'three/webgpu';
 import { GEO } from './geodata.js';
-import { BLOCKS, PARKS, WATER, ISLAND_BOUNDS, toPts } from './city-config.js';
-import { createRoadSurfaceMaterial, createSidewalkMaterial, createCurbMaterial, createParkLawnMaterial, createWaterMaterial } from '../tsl-materials.js';
+import { BLOCKS, PARKS, WATER, ISLAND_BOUNDS, toPts, polygonStrips } from './city-config.js';
+import { createRoadSurfaceMaterial, createSidewalkMaterial, createCurbMaterial, createParkLawnMaterial, createParkPavingMaterial, createWaterMaterial } from '../tsl-materials.js';
 import { createDirtMaterial, createCanalLiningMaterial } from './materials.js';
+import { SIGNAL_SITES } from './signals.js';
 
 // js/obregon/city-grid.js
 // Ciudad Obregón's ground, in place of js/city-grid.js: the street pavement along every road centreline at its
@@ -85,10 +86,17 @@ class MeshBuilder {
     for (let i = 0; i < n; i++) pts.push({ x: x + Math.cos((i / n) * Math.PI * 2) * r, z: z + Math.sin((i / n) * Math.PI * 2) * r });
     this.flat(pts, y);
   }
-  mesh(material, name, { castShadow = false, receiveShadow = true } = {}) {
+  // `uv`: one (u, v) for every vertex (materials that pick a style by uv, e.g. the park paving)
+  mesh(material, name, { castShadow = false, receiveShadow = true, uv = null } = {}) {
     const g = new THREE.BufferGeometry();
     g.setAttribute('position', new THREE.Float32BufferAttribute(this.pos, 3));
     g.setAttribute('normal', new THREE.Float32BufferAttribute(this.nrm, 3));
+    if (uv) {
+      const n = this.pos.length / 3;
+      const a = new Float32Array(n * 2);
+      for (let i = 0; i < n; i++) a.set(uv, i * 2);
+      g.setAttribute('uv', new THREE.BufferAttribute(a, 2));
+    }
     g.computeBoundingSphere();
     g.computeBoundingBox();
     const m = new THREE.Mesh(g, material);
@@ -149,9 +157,10 @@ function buildCityGrid(scene) {
     curb.walls(b.poly, ROAD_Y - 0.05, SW);
   }
 
-  // 5. Parks & plazas: lawn on their curb island, or on the ground
+  // 5. Parks, on their curb island or on the ground: lawn, and the plazas paved in granite
   const lawn = new MeshBuilder();
-  for (const p of PARKS) lawn.flat(p.poly, p.block && !p.block.water ? SW + 0.006 : PARK_GROUND_Y);
+  const plaza = new MeshBuilder();
+  for (const p of PARKS) (/^Plaza\b/i.test(p.name) ? plaza : lawn).flat(p.poly, p.block && !p.block.water ? SW + 0.006 : PARK_GROUND_Y);
 
   // 6. Irrigation canals: water between concrete linings, under the street pavement where streets cross them
   const canalWater = new MeshBuilder();
@@ -174,13 +183,33 @@ function buildCityGrid(scene) {
   group.add(curb.mesh(createCurbMaterial(), 'ObregonCurbs'));
   group.add(yard.mesh(dirt, 'ObregonYards'));
   group.add(lawn.mesh(createParkLawnMaterial(), 'ObregonParks'));
+  // (paving style 1: light granite pavers in running bond, tsl-materials.js createParkPavingMaterial)
+  if (plaza.pos.length) group.add(plaza.mesh(createParkPavingMaterial(), 'ObregonPlazas', { uv: [1, 0] }));
   group.add(lining.mesh(createCanalLiningMaterial(), 'ObregonCanalLining'));
   group.add(canalWater.mesh(waterMat, 'ObregonCanals'));
   scene.add(group);
 
-  // The road network bounds the lanes by the street widths themselves, so no curb rectangles; nothing at grade blocks
-  // the streets and there are no expressways
-  return { group, sidewalks: [], footprints: [], colliders: [], highwayLanes: [] };
+  // The road network's sidewalks (curb rectangles): just the curb islands' corners at the signalized intersections,
+  // where the crosswalks land (2 m in from the curb, up to ~2 m from the corner) and what the lanes there keep clear of.
+  // Along the streets the network takes the lanes from the street widths: curb rectangles there would cut off the outer
+  // lanes of divided avenues, whose two roadways the network joins on one centreline (road-network.js)
+  const sidewalks = [];
+  for (const s of SIGNAL_SITES) {
+    if (!s.cardinal) continue;
+    const ex = s.hx + 4, ez = s.hz + 4;
+    const near = (b) => b.minX < s.x + ex && b.maxX > s.x - ex && b.minZ < s.z + ez && b.maxZ > s.z - ez;
+    for (const b of BLOCKS) {
+      if (b.water || !near(b)) continue;
+      for (const r of polygonStrips(b.poly, 1, true)) {
+        const c = {
+          minX: Math.max(r.minX, s.x - ex), maxX: Math.min(r.maxX, s.x + ex),
+          minZ: Math.max(r.minZ, s.z - ez), maxZ: Math.min(r.maxZ, s.z + ez)
+        };
+        if (c.maxX > c.minX && c.maxZ > c.minZ) sidewalks.push(c);
+      }
+    }
+  }
+  return { group, sidewalks, footprints: [], colliders: [], highwayLanes: [] };
 }
 
 export { buildCityGrid, MeshBuilder };

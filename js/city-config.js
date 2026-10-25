@@ -758,6 +758,20 @@ const CITY_ID = 'nyc';
 const PLAYER_SPAWN = { x: 0, z: streetZ(37) };
 // What the HUD calls the player in each mode
 const PLAYER_LABELS = { person: 'Pedestrian', car: 'NYC Yellow Taxi', cyclist: 'NYC Bike Lane Cyclist', helicopter: 'Sightseeing Helicopter' };
+// The player's car: a yellow medallion cab with its door decals & New York plates (controllers.js)
+const PLAYER_CAR = { body: 'taxi', color: 0xffbe14, nycLivery: true };
+// Grid-like centreline junctions (road-network.js): Manhattan's grid has its own, so none here
+const CARDINAL_JUNCTIONS = false;
+// The HUD's speed (mph) & altitude (ft), per m/s & per metre (the page labels the units)
+const HUD_UNITS = { speed: 2.237, altitude: 3.281 };
+// Traffic: yellow cabs (every 5th car), NYPD cruisers (every 40th), sedans & SUVs (traffic.js)
+const TRAFFIC_MIX = {
+  taxiEvery: 5, policeEvery: 40, taxiColor: 0xffbe14,
+  // black town car / Uber, metallic silver, deep navy, graphite grey, burgundy
+  sedanPalette: [0x1c2026, 0xcfd6de, 0x1d3b6c, 0x52575e, 0x6e1f24],
+  // executive black Escalade / Suburban, pearl white, slate metallic, forest green, silver
+  suvPalette: [0x16191e, 0xf0f3f7, 0x3a434d, 0x28382e, 0xbec6cf]
+};
 // How much the street canyons shade street level from the sky (tsl-materials.js canyonSkyAONode): fully, in Manhattan
 const STREET_CANYON = 1.0;
 
@@ -765,6 +779,10 @@ export {
   CITY_ID,
   PLAYER_SPAWN,
   PLAYER_LABELS,
+  PLAYER_CAR,
+  HUD_UNITS,
+  CARDINAL_JUNCTIONS,
+  TRAFFIC_MIX,
   STREET_CANYON,
   AVENUES,
   ALL_AVENUES,

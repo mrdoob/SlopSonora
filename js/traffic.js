@@ -1,7 +1,7 @@
 import * as THREE from 'three/webgpu';
 import { buildRoadNetwork } from './road-network.js';
 import { createPedestrianSystem } from './pedestrian-system.js';
-import { signalPhase, walkSignal } from './city-config.js';
+import { signalPhase, walkSignal, TRAFFIC_MIX } from './city-config.js';
 import { cityUniforms, createContactShadowMaterial, createCarFlareMaterial } from './tsl-materials.js';
 import { HEADLIGHTS, createVehicleHeadlight, placeVehicleHeadlight } from './vehicle-lights.js';
 import {
@@ -155,22 +155,12 @@ function createTrafficSystem(scene, sidewalks, obstacles, signalIntersections) {
   const suvMat = createLoftedCarMaterial(BODY_SPECS.suv);
   const carWheelMat = createLoftedCarMaterial(BODY_SPECS.sedan, 0xffbe14);
 
-  const taxiYellow = new THREE.Color(0xffbe14);
+  // The city's mix (city-config.js TRAFFIC_MIX): every taxiEvery-th car a taxi, every policeEvery-th a police cruiser
+  // (0: none), the rest sedans & SUVs in the city's paints
+  const taxiYellow = new THREE.Color(TRAFFIC_MIX.taxiColor);
   const policeWhite = new THREE.Color(0xf6f9fc);
-  const sedanPalette = [
-    new THREE.Color(0x1c2026), // Black Town Car / Uber
-    new THREE.Color(0xcfd6de), // Metallic Silver Sedan
-    new THREE.Color(0x1d3b6c), // Deep Navy Sedan
-    new THREE.Color(0x52575e), // Graphite Grey Sedan
-    new THREE.Color(0x6e1f24)  // Burgundy Sedan
-  ];
-  const suvPalette = [
-    new THREE.Color(0x16191e), // Executive Black Escalade/Suburban
-    new THREE.Color(0xf0f3f7), // Pearl White SUV
-    new THREE.Color(0x3a434d), // Slate Metallic SUV
-    new THREE.Color(0x28382e), // Forest Green SUV
-    new THREE.Color(0xbec6cf)  // Silver SUV
-  ];
+  const sedanPalette = TRAFFIC_MIX.sedanPalette.map((c) => new THREE.Color(c));
+  const suvPalette = TRAFFIC_MIX.suvPalette.map((c) => new THREE.Color(c));
 
   const cars = [];
   let taxiCount = 0;
@@ -179,8 +169,8 @@ function createTrafficSystem(scene, sidewalks, obstacles, signalIntersections) {
   let policeCount = 0;
 
   for (let i = 0; i < NUM_CARS; i++) {
-    const isPolice = (i % 40) === 6;
-    const isTaxi = !isPolice && (i % 5) === 0;
+    const isPolice = TRAFFIC_MIX.policeEvery > 0 && (i % TRAFFIC_MIX.policeEvery) === 6 % TRAFFIC_MIX.policeEvery;
+    const isTaxi = !isPolice && TRAFFIC_MIX.taxiEvery > 0 && (i % TRAFFIC_MIX.taxiEvery) === 0;
     const isSUV = !isPolice && !isTaxi && (i % 2 === 0);
 
     let bodyType = 'sedan';

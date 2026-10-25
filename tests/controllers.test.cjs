@@ -25,6 +25,7 @@ function keyboardHarness(nyc = {}) {
   const config = {
     PLAYER_SPAWN: { x: 0, z: 0 },
     PLAYER_LABELS: {},
+    PLAYER_CAR: { body: 'taxi', color: 0xffbe14, nycLivery: true },
     isTypingInField: (event) => ['INPUT', 'SELECT'].includes(event.target?.tagName),
     ...nyc
   };

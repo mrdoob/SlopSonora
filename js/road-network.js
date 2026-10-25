@@ -3,7 +3,8 @@ import {
   ALL_STREETS,
   ISLAND_BOUNDS,
   getIslandBoundsAtZ,
-  BLOCKS
+  BLOCKS,
+  CARDINAL_JUNCTIONS
 } from './city-config.js';
 import { GEO } from './nyc-geodata.js';
 
@@ -865,7 +866,16 @@ function buildRoadNetwork(sidewalks, obstacles, signalIntersections = []) {
     const arms = n.arms;
     let next = 4;
     for (const a of arms) a.side = -1;
-    if (!n.general) {
+    // A signalized centreline junction whose roads all run along the compass axes works like a grid intersection
+    // where the city asks for it (city-config.js CARDINAL_JUNCTIONS): sides by compass direction (so crosswalks), the
+    // north-south road on the avenue phase, and the box half sizes the crosswalks keep clear of
+    const cardinal = CARDINAL_JUNCTIONS && n.general && n.signal && arms.length >= 3 &&
+      arms.every((a) => Math.max(Math.abs(a.ux), Math.abs(a.uz)) > 0.966);
+    if (cardinal) {
+      n.hx = Math.max(0, ...arms.filter((a) => Math.abs(a.uz) > 0.966).map((a) => a.half));
+      n.hz = Math.max(0, ...arms.filter((a) => Math.abs(a.ux) > 0.966).map((a) => a.half));
+    }
+    if (!n.general || cardinal) {
       // each compass side goes to the arm best aligned with it, within 15°
       CARD.forEach(([cx, cz], c) => {
         let best = null;
@@ -910,7 +920,7 @@ function buildRoadNetwork(sidewalks, obstacles, signalIntersections = []) {
       roads.push({ members, group: -1, rank: Math.max(...members.map((m) => (m.ave ? 100 : 0) + m.half)) });
     }
     let groups = 0;
-    if (!n.general) {
+    if (!n.general || cardinal) {
       // on the grid the road with a north-south arm is the avenue (0), the one with an east-west arm the street (1)
       for (const r of roads) {
         if (r.members.some((m) => m.side === 2 || m.side === 3)) r.group = 0;
