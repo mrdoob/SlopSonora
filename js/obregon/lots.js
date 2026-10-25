@@ -1,5 +1,5 @@
 import { GEO } from './geodata.js';
-import { BLOCKS, ROAD_SEGMENTS, PARKS, WATER, pointInPoly } from './city-config.js';
+import { BLOCKS, ROAD_SEGMENTS, PARKS, WATER, pointInPoly, segDist } from './city-config.js';
 
 // js/obregon/lots.js
 // Where Ciudad Obregón's ordinary buildings stand (buildings.js builds them). OpenStreetMap maps only a few hundred
@@ -84,11 +84,6 @@ const bounds = (Q) => ({
   minX: Math.min(...Q.map((p) => p.x)), maxX: Math.max(...Q.map((p) => p.x)),
   minZ: Math.min(...Q.map((p) => p.z)), maxZ: Math.max(...Q.map((p) => p.z))
 });
-function segDist(s, x, z) {
-  const ex = s.x1 - s.x0, ez = s.z1 - s.z0;
-  const t = Math.max(0, Math.min(1, ((x - s.x0) * ex + (z - s.z0) * ez) / (ex * ex + ez * ez || 1)));
-  return Math.hypot(s.x0 + ex * t - x, s.z0 + ez * t - z);
-}
 // Does the polygon P (any shape) overlap the convex quad Q? (an edge crossing, or one inside the other)
 function polyOverlapsQuad(P, Q) {
   for (const c of Q) if (pointInPoly(P, c.x, c.z)) return true;

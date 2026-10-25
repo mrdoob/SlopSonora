@@ -27,6 +27,43 @@ function styleOf(kind) {
   return 'institution';
 }
 
+// The malls, supermarkets & cinemas get glazed fronts
+const GLASS = /^(Plaza Obregón|Plaza Tutuli|Soriana|Walmart|Sam's Club|Liverpool|Cinépolis|Cinepolis|Cinemex)/;
+
+// Colliders that follow a footprint of any shape (courtyards, L- & U-shaped wings, footprints turned off the grid):
+// axis-aligned strips, one per run of 2.5 m scanlines crossing the same stretch of it
+const STRIP = 2.5;
+function footprintStrips(poly) {
+  let minZ = Infinity, maxZ = -Infinity;
+  for (const p of poly) { minZ = Math.min(minZ, p.z); maxZ = Math.max(maxZ, p.z); }
+  const strips = [];
+  let open = []; // strips still growing: { minX, maxX, minZ, maxZ }
+  for (let z0 = minZ; z0 < maxZ; z0 += STRIP) {
+    const z1 = Math.min(maxZ, z0 + STRIP);
+    const zc = (z0 + z1) / 2;
+    const xs = [];
+    for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+      const a = poly[i], c = poly[j];
+      if ((a.z > zc) !== (c.z > zc)) xs.push(a.x + ((zc - a.z) * (c.x - a.x)) / (c.z - a.z));
+    }
+    xs.sort((p, q) => p - q);
+    const next = [];
+    for (let k = 0; k + 1 < xs.length; k += 2) {
+      const prev = open.find((o) => Math.abs(o.minX - xs[k]) < 0.3 && Math.abs(o.maxX - xs[k + 1]) < 0.3);
+      if (prev) {
+        prev.maxZ = z1;
+        next.push(prev);
+      } else {
+        const o = { minX: xs[k], maxX: xs[k + 1], minZ: z0, maxZ: z1 };
+        strips.push(o);
+        next.push(o);
+      }
+    }
+    open = next;
+  }
+  return strips;
+}
+
 // Bryant Park's lawn has no counterpart in Obregón (cameras.js & controllers.js read it)
 const bryantParkLawn = null;
 
@@ -54,14 +91,9 @@ function buildLandmarks(scene) {
     geo.rotateX(-Math.PI / 2);
     geo.translate(0, SW, 0);
     geo.deleteAttribute('uv');
-    const style = /mall|Plaza|Soriana|Walmart|Sam's|Liverpool|Cin/.test(b.name) ? 'glass' : styleOf(b.kind);
+    const style = GLASS.test(b.name) || /mall|cinema/.test(b.kind) ? 'glass' : styleOf(b.kind);
     geos[style].push(geo.index ? geo.toNonIndexed() : geo);
-    let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
-    for (const p of pts) {
-      minX = Math.min(minX, p.x); maxX = Math.max(maxX, p.x);
-      minZ = Math.min(minZ, -p.y); maxZ = Math.max(maxZ, -p.y);
-    }
-    colliders.push({ minX, maxX, minZ, maxZ, minY: 0, maxY: SW + h });
+    for (const c of footprintStrips(pts.map((p) => ({ x: p.x, z: -p.y })))) colliders.push({ ...c, minY: 0, maxY: SW + h });
   }
 
   const materials = {

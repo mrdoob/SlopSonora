@@ -128,8 +128,14 @@ for (const w of drivable) {
     for (let i = 1; i < run.length; i++) {
       if (i === run.length - 1 || nodeUse.get(run[i]) > 1) {
         const ids = run.slice(start, i + 1);
-        if (ids.length >= 2 && ids[0] !== ids[ids.length - 1]) {
-          rawLinks.push({ a: ids[0], b: ids[ids.length - 1], pts: ids.map((id) => nodePos.get(id)), name, ...spec });
+        // a loop back to where it started (a ring street joined to the rest at one node) splits in two halves
+        const pieces = ids.length >= 4 && ids[0] === ids[ids.length - 1]
+          ? [ids.slice(0, Math.floor(ids.length / 2) + 1), ids.slice(Math.floor(ids.length / 2))]
+          : [ids];
+        for (const p of pieces) {
+          if (p.length >= 2 && p[0] !== p[p.length - 1]) {
+            rawLinks.push({ a: p[0], b: p[p.length - 1], pts: p.map((id) => nodePos.get(id)), name, ...spec });
+          }
         }
         start = i;
       }

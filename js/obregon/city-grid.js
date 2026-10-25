@@ -1,6 +1,6 @@
 import * as THREE from 'three/webgpu';
 import { GEO } from './geodata.js';
-import { BLOCKS, PARKS, WATER, ISLAND_BOUNDS } from './city-config.js';
+import { BLOCKS, PARKS, WATER, ISLAND_BOUNDS, toPts } from './city-config.js';
 import { createRoadSurfaceMaterial, createSidewalkMaterial, createCurbMaterial, createParkLawnMaterial, createWaterMaterial } from '../tsl-materials.js';
 import { createDirtMaterial, createCanalLiningMaterial } from './materials.js';
 
@@ -101,11 +101,6 @@ class MeshBuilder {
   }
 }
 
-const toPts = (flat) => {
-  const out = [];
-  for (let i = 0; i < flat.length; i += 2) out.push({ x: flat[i], z: flat[i + 1] });
-  return out;
-};
 function buildCityGrid(scene) {
   const group = new THREE.Group();
   group.name = 'ManhattanCityGrid'; // (the name main.js culls the city ground by)

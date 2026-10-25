@@ -1,5 +1,5 @@
 import { GEO } from './geodata.js';
-import { BLOCKS, PARKS, WATER, ROADS, ROAD_SEGMENTS, NYC_LANDMARKS, ISLAND_BOUNDS, getLocationLabel, isTypingInField, signName } from './city-config.js';
+import { BLOCKS, PARKS, WATER, ROADS, ROAD_SEGMENTS, NYC_LANDMARKS, ISLAND_BOUNDS, getLocationLabel, isTypingInField, signName, toPts } from './city-config.js';
 
 // js/obregon/map.js
 // Radar minimap & full-screen interactive map of Ciudad Obregón, in place of js/nyc-map.js (same page elements, same
@@ -9,7 +9,7 @@ import { BLOCKS, PARKS, WATER, ROADS, ROAD_SEGMENTS, NYC_LANDMARKS, ISLAND_BOUND
 // landmarks.
 
 const FONT = 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
-const BASE_SCALE = 0.6; // base map pixels per metre
+const BASE_SCALE = 0.45; // base map pixels per metre (~3060 x 2250 px over the detailed area)
 const RADAR_SCALE = 0.55; // radar CSS pixels per metre
 const MIN_ZOOM = 0.04;
 const MAX_ZOOM = 3.5;
@@ -18,11 +18,6 @@ const C = {
   street: '#ffffff', major: '#f6c869', casing: '#b9ab92', label: '#3b3326'
 };
 
-const toPts = (flat) => {
-  const out = [];
-  for (let i = 0; i < flat.length; i += 2) out.push({ x: flat[i], z: flat[i + 1] });
-  return out;
-};
 const MAJOR = new Set(['trunk', 'primary', 'secondary']);
 
 // Street labels: the straight runs of each named street, its pieces between junctions joined end to end where they
@@ -102,8 +97,8 @@ class NYCMapSystem {
     this.panStart = { x: 0, y: 0, cx: 0, cz: 0 };
     this.dragMoved = false;
     this.searchSegments = null;
-    const plaza = NYC_LANDMARKS.find((l) => /Catedral/.test(l.name)) || { x: 0, z: 0 };
-    this.waypoint = { x: plaza.x, z: plaza.z, name: 'Plaza Álvaro Obregón' };
+    this.textWidths = new Map();
+    this.waypoint = { x: 0, z: 40, name: 'Plaza Álvaro Obregón' }; // (the plaza's teleport, city-config.js)
 
     this.base = this.renderBase();
     this.initEvents();
@@ -366,8 +361,9 @@ class NYCMapSystem {
         if (!l.major && zoom < 0.7) continue;
         const [x0, y0] = S(l.s.x0, l.s.z0);
         const [x1, y1] = S(l.s.x1, l.s.z1);
+        if (Math.max(x0, x1) < -50 || Math.min(x0, x1) > w + 50 || Math.max(y0, y1) < -50 || Math.min(y0, y1) > h + 50) continue;
         const len = Math.hypot(x1 - x0, y1 - y0);
-        const tw = ctx.measureText(l.text).width;
+        const tw = this.textWidth(ctx, l.text);
         if (len < tw + 12) continue;
         // on the run, as near the middle of the view as its ends allow
         const t = Math.max(0, Math.min(1, ((w / 2 - x0) * (x1 - x0) + (h / 2 - y0) * (y1 - y0)) / (len * len)));
@@ -451,6 +447,14 @@ class NYCMapSystem {
     ctx.fill();
     ctx.stroke();
     ctx.restore();
+  }
+
+  // Text widths, measured once per font
+  textWidth(ctx, text) {
+    const key = `${ctx.font}|${text}`;
+    let w = this.textWidths.get(key);
+    if (w === undefined) this.textWidths.set(key, (w = ctx.measureText(text).width));
+    return w;
   }
 
   renderFullMap() {

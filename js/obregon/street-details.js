@@ -1,7 +1,8 @@
 import * as THREE from 'three/webgpu';
 import { uniform, color, float, smoothstep } from 'three/tsl';
 import { GEO } from './geodata.js';
-import { ISLAND_BOUNDS, PARKS, blockAt, pointInPoly, signalPhase } from './city-config.js';
+import { ISLAND_BOUNDS, PARKS, WATER, blockAt, pointInPoly, signalPhase } from './city-config.js';
+import { rng } from './lots.js';
 import { cityUniforms } from '../tsl-materials.js';
 import { createTreeField } from '../trees.js';
 
@@ -17,17 +18,6 @@ import { createTreeField } from '../trees.js';
 
 const MAJOR = new Set(['trunk', 'primary', 'secondary', 'tertiary']);
 const MERGE = 14; // m: junctions this close are one intersection (as js/road-network.js collapses them)
-
-function rng(seed) {
-  let a = seed >>> 0;
-  return () => {
-    a = (a + 0x6d2b79f5) >>> 0;
-    let t = a;
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
 
 function buildStreetDetails(scene) {
   const group = new THREE.Group();
@@ -61,6 +51,21 @@ function buildStreetDetails(scene) {
     }
     return false;
   };
+  // ...and out of the mapped buildings (their footprints may reach the curb)
+  const mappedCells = new Map();
+  for (const bld of GEO.buildings) {
+    const poly = [];
+    for (let i = 0; i < bld.ring.length; i += 2) poly.push({ x: bld.ring[i], z: bld.ring[i + 1] });
+    const xs = poly.map((p) => p.x), zs = poly.map((p) => p.z);
+    for (let ix = Math.floor(Math.min(...xs) / 32); ix <= Math.floor(Math.max(...xs) / 32); ix++) {
+      for (let iz = Math.floor(Math.min(...zs) / 32); iz <= Math.floor(Math.max(...zs) / 32); iz++) {
+        const k = ix * 100003 + iz;
+        if (!mappedCells.has(k)) mappedCells.set(k, []);
+        mappedCells.get(k).push(poly);
+      }
+    }
+  }
+  const inBuilding = (x, z) => (mappedCells.get(Math.floor(x / 32) * 100003 + Math.floor(z / 32)) || []).some((p) => pointInPoly(p, x, z));
   const claim = (x, z, size) => {
     const k = spotKey(x, z);
     if (!spots.has(k)) spots.set(k, []);
@@ -147,7 +152,7 @@ function buildStreetDetails(scene) {
       // traffic comes in along -u; its right is (uz, -ux)
       const px = s.x - a.ux * (cross + 2.2) + a.uz * (own + 1.1);
       const pz = s.z - a.uz * (cross + 2.2) - a.ux * (own + 1.1);
-      if (!blockAt(px, pz)) continue;
+      if (!blockAt(px, pz) || inBuilding(px, pz)) continue;
       claim(px, pz, 0.3);
       dummy.position.set(px, SW + 2.6, pz);
       dummy.rotation.set(0, 0, 0);
@@ -219,7 +224,7 @@ function buildStreetDetails(scene) {
         const t = next - walked;
         const off = (l.half + 0.6) * side;
         const x = p.x + ux * t - uz * off, z = p.z + uz * t + ux * off;
-        if (next > 10 && next < l.len - 10 && blockAt(x, z) && !near(x, z, 8)) {
+        if (next > 10 && next < l.len - 10 && blockAt(x, z) && !inBuilding(x, z) && !near(x, z, 8)) {
           claim(x, z, 0.25);
           lampPoles.push({ x, z });
           // the arm reaches back over the street
@@ -235,7 +240,7 @@ function buildStreetDetails(scene) {
         const s = rand() < 0.5 ? 1 : -1;
         const off = (l.half + 1.5) * s;
         const x = p.x + ux * t - uz * off, z = p.z + uz * t + ux * off;
-        if (t + walked < 8 || t + walked > l.len - 8 || !blockAt(x, z) || near(x, z, 4.5)) continue;
+        if (t + walked < 8 || t + walked > l.len - 8 || !blockAt(x, z) || inBuilding(x, z) || near(x, z, 4.5)) continue;
         claim(x, z, 0.35);
         const r = rand();
         treeSites.push({ x, y: SW, z, scale: 0.55 + rand() * 0.3, species: r < 0.65 ? 1 : r < 0.92 ? 0 : 2, yaw: rand() * Math.PI * 2, tier: 2 });
@@ -277,7 +282,7 @@ function buildStreetDetails(scene) {
     const n = Math.min(400, Math.round(Math.abs(area / 2) / 220));
     for (let k = 0, tries = 0; k < n && tries < n * 4; tries++) {
       const x = minX + rand() * (maxX - minX), z = minZ + rand() * (maxZ - minZ);
-      if (!pointInPoly(park.poly, x, z) || near(x, z, 5)) continue;
+      if (!pointInPoly(park.poly, x, z) || inBuilding(x, z) || WATER.some((w) => pointInPoly(w.poly, x, z)) || near(x, z, 5)) continue;
       claim(x, z, 0.4);
       const b = blockAt(x, z);
       const r = rand();

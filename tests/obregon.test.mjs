@@ -124,6 +124,14 @@ test('lots are deterministic, stay inside their block\'s building line and never
   }
 });
 
+test('the lagoon is no sidewalk, and its teleport arrives on the shore road', () => {
+  const lagoon = WATER.find((w) => /N.inari/.test(w.name));
+  const c = lagoon.poly.reduce((s, p) => ({ x: s.x + p.x / lagoon.poly.length, z: s.z + p.z / lagoon.poly.length }), { x: 0, z: 0 });
+  assert.equal(blockAt(c.x, c.z), null);
+  const t = TELEPORT_LOCATIONS.nainari;
+  assert.ok(!WATER.some((w) => pointInPoly(w.poly, t.x, t.z)));
+});
+
 test('the player starts on a street, and every teleport lies in the city', () => {
   assert.equal(blockAt(PLAYER_SPAWN.x, PLAYER_SPAWN.z), null, 'spawn on the roadway');
   assert.match(getLocationLabel(PLAYER_SPAWN.x, PLAYER_SPAWN.z), /Jalisco/);

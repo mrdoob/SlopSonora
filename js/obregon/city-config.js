@@ -111,6 +111,8 @@ for (const b of BLOCKS) {
   b.water = waterShare(b) > 0.25;
   b.parkArea = 0;
 }
+// ...and no curb island to stand on: blockAt never returns them (the shared modules treat any block as sidewalk)
+for (const [k, list] of blockCells) blockCells.set(k, list.filter((b) => !b.water));
 for (const p of PARKS) {
   const c = centroid(p.poly);
   p.block = blockAt(c.x, c.z);
@@ -205,11 +207,23 @@ function getLocationLabel(x, z) {
 }
 
 const landmark = (re) => NYC_LANDMARKS.find((l) => re.test(l.name)) || { x: 0, z: 0 };
+// The point on a street nearest a place (for places like the lagoon, whose middle is no place to arrive)
+function streetNear(p) {
+  let best = { x: p.x, z: p.z }, bd = Infinity;
+  for (const s of ROAD_SEGMENTS) {
+    const ex = s.x1 - s.x0, ez = s.z1 - s.z0;
+    const t = Math.max(0, Math.min(1, ((p.x - s.x0) * ex + (p.z - s.z0) * ez) / (ex * ex + ez * ez || 1)));
+    const x = s.x0 + ex * t, z = s.z0 + ez * t;
+    const d = Math.hypot(x - p.x, z - p.z);
+    if (d < bd) { bd = d; best = { x, z }; }
+  }
+  return best;
+}
 const TELEPORT_LOCATIONS = {
   plaza: { x: 0, z: 40, heading: Math.PI },
   catedral: { ...landmark(/Catedral/), heading: Math.PI },
   palacio: { ...landmark(/Palacio Municipal/), heading: Math.PI },
-  nainari: { ...landmark(/Laguna del N/), heading: Math.PI / 2 },
+  nainari: { ...streetNear(landmark(/Laguna del N/)), heading: Math.PI / 2 },
   itson: { ...landmark(/Instituto Tecnol|Rector/), heading: Math.PI },
   mercajeme: { ...landmark(/MerCajeme/), heading: Math.PI },
   estadio: { ...landmark(/Estadio Tom/), heading: Math.PI }
@@ -274,6 +288,8 @@ export {
   streetZ,
   blockAt,
   pointInPoly,
+  segDist,
+  toPts,
   nearestRoads,
   signName,
   getLocationLabel,
