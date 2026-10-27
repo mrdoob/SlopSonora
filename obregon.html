@@ -7,16 +7,16 @@
   <link rel="icon" href="data:," />
   <meta name="description" content="Ciudad Obregón, Sonora, en 3D con Three.js WebGPURenderer y TSL: sus calles reales de OpenStreetMap, tráfico, peatones y cuatro modos de juego (a pie, en auto, en bicicleta y en helicóptero)." />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-  <!-- three.js dev branch (builds committed to mrdoob/three.js@dev, served by jsDelivr). The same engine as index.html:
+  <!-- three.js dev branch pinned to a commit (builds committed to mrdoob/three.js@dev, served by jsDelivr). The same engine as index.html:
        the import map swaps New York's city modules (geography, configuration, ground, buildings, landmarks, street
        furniture, surroundings, map & scenic cameras) for Ciudad Obregón's in js/obregon/. -->
   <script type="importmap">
     {
       "imports": {
-        "three": "https://cdn.jsdelivr.net/gh/mrdoob/three.js@dev/build/three.webgpu.js",
-        "three/webgpu": "https://cdn.jsdelivr.net/gh/mrdoob/three.js@dev/build/three.webgpu.js",
-        "three/tsl": "https://cdn.jsdelivr.net/gh/mrdoob/three.js@dev/build/three.tsl.js",
-        "three/addons/": "https://cdn.jsdelivr.net/gh/mrdoob/three.js@dev/examples/jsm/",
+        "three": "https://cdn.jsdelivr.net/gh/mrdoob/three.js@f17eb5d689094a3fbd4cd0d64d54729a48036ce0/build/three.webgpu.js",
+        "three/webgpu": "https://cdn.jsdelivr.net/gh/mrdoob/three.js@f17eb5d689094a3fbd4cd0d64d54729a48036ce0/build/three.webgpu.js",
+        "three/tsl": "https://cdn.jsdelivr.net/gh/mrdoob/three.js@f17eb5d689094a3fbd4cd0d64d54729a48036ce0/build/three.tsl.js",
+        "three/addons/": "https://cdn.jsdelivr.net/gh/mrdoob/three.js@f17eb5d689094a3fbd4cd0d64d54729a48036ce0/examples/jsm/",
         "./js/nyc-geodata.js": "./js/obregon/geodata.js",
         "./js/city-config.js": "./js/obregon/city-config.js",
         "./js/city-grid.js": "./js/obregon/city-grid.js",
